@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AnimalsProtect</string>
+    <string name="home">首页</string>
+    <string name="adoption">收养</string>
+    <string name="rank">排行</string>
+    <string name="my">我的</string>
+</resources>

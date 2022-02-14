@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxHeight="@dimen/size_357dp">
+
+    <ImageView
+        android:id="@+id/pic"
+        android:layout_width="@dimen/size_43dp"
+        android:layout_height="@dimen/size_43dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/xiaomao1"
+        android:layout_marginLeft="@dimen/size_9dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_8dp"
+        android:layout_marginTop="@dimen/size_1dp"
+        android:text="小猫咪"
+        android:textColor="@color/broadcast_name"
+        android:textSize="@dimen/font_16sp"
+        app:layout_constraintStart_toEndOf="@+id/pic"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/words"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_62dp"
+        android:layout_marginTop="@dimen/size_5dp"
+        android:layout_marginEnd="@dimen/size_13dp"
+        android:text="今天又没吃到小鱼干，人家要掉小珍珠了。。。。呜呜呜呜呜呜"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <GridView
+        android:id="@+id/pic_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="3"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:layout_marginStart="@dimen/size_62dp"
+        android:layout_marginEnd="@dimen/size_13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/words"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_9dp"
+        android:text="1小时前"
+        android:textColor="@color/grayness"
+        android:textSize="@dimen/font_12sp"
+        app:layout_constraintStart_toStartOf="@+id/pic_grid"
+        app:layout_constraintTop_toBottomOf="@+id/pic_grid" />
+
+    <ImageView
+        android:id="@+id/more"
+        android:layout_width="@dimen/size_19dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/more"
+        app:layout_constraintBottom_toBottomOf="@+id/time"
+        app:layout_constraintEnd_toEndOf="@+id/pic_grid"
+        app:layout_constraintTop_toTopOf="@+id/time" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/praise_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/broadcast_commit"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:layout_marginStart="@dimen/size_62dp"
+        android:layout_marginEnd="@dimen/size_13dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/time">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="@dimen/size_20dp"
+            android:layout_height="@dimen/size_20dp"
+            android:layout_marginStart="@dimen/size_7dp"
+            android:layout_marginTop="@dimen/size_6dp"
+            android:src="@drawable/prase"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/people_names"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="8dp"
+            android:text=""
+            android:textColor="@color/broadcast_name"
+            android:textSize="@dimen/font_12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/people_names" />
+
+        <ListView
+            android:id="@+id/people_words"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.animal.AnimalActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_315dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/org_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/iu_two"/>
+
+        <ImageView
+            android:id="@+id/back_ic"
+            android:layout_width="@dimen/size_30dp"
+            android:layout_height="@dimen/size_30dp"
+            android:layout_marginStart="@dimen/size_5dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:src="@drawable/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/org_report"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_27dp"
+            android:layout_marginTop="@dimen/size_14dp"
+            android:layout_marginEnd="@dimen/size_14dp"
+            android:src="@drawable/report"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.sixing.animalsprotect.shape.CircleView
+            android:id="@+id/org_pic"
+            android:layout_width="@dimen/size_79dp"
+            android:layout_height="@dimen/size_79dp"
+            android:layout_marginStart="@dimen/size_27dp"
+            android:layout_marginBottom="@dimen/size_15dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/iu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/org_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_12dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:text="阿福救助中心"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_16sp"
+            app:layout_constraintStart_toEndOf="@+id/org_pic"
+            app:layout_constraintTop_toTopOf="@+id/org_pic" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_38dp"
+            android:text="地址："
+            android:textColor="@color/user_words_grayness"
+            android:textSize="@dimen/font_11sp"
+            app:layout_constraintStart_toStartOf="@+id/org_name"
+            app:layout_constraintTop_toTopOf="@+id/org_pic" />
+
+        <TextView
+            android:id="@+id/org_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="福建省厦门市集美区"
+            android:textColor="@color/user_words_grayness"
+            android:textSize="@dimen/font_11sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView6"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5dp"
+            android:text="联系方式："
+            android:textColor="@color/user_words_grayness"
+            android:textSize="@dimen/font_11sp"
+            app:layout_constraintStart_toStartOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/org_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15985851853"
+            android:textColor="@color/user_words_grayness"
+            android:textSize="@dimen/font_11sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView7"
+            app:layout_constraintStart_toEndOf="@+id/textView7"
+            app:layout_constraintTop_toTopOf="@+id/textView7" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraint">
+
+        <TextView
+            android:id="@+id/org_boardcast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/org_grayness"
+            android:padding="@dimen/size_10dp"
+            android:text="机构动态" />
+
+        <TextView
+            android:id="@+id/org_animals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/org_grayness"
+            android:padding="@dimen/size_10dp"
+            android:text="小动物们" />
+
+        <TextView
+            android:id="@+id/org_accounts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/org_grayness"
+            android:padding="@dimen/size_10dp"
+            android:text="收支记录" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/transparency"
+        android:dividerHeight="@dimen/size_20dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

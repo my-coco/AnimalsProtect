@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_84dp"
+    android:background="@drawable/border_grayness">
+
+    <com.sixing.animalsprotect.shape.CircleView
+        android:id="@+id/animal_pic"
+        android:layout_width="@dimen/size_55dp"
+        android:layout_height="@dimen/size_55dp"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="@dimen/size_14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/animal_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_15dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/animal_pic"
+        app:layout_constraintStart_toEndOf="@+id/animal_pic"
+        app:layout_constraintTop_toTopOf="@+id/animal_pic" />
+
+    <TextView
+        android:id="@+id/surplusFood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_58dp"
+        android:textColor="@color/adoption_day"
+        android:textSize="@dimen/font_16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/animal_pic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/animal_pic" />
+
+    <ImageView
+        android:id="@+id/animal_food"
+        android:layout_width="@dimen/size_30dp"
+        android:layout_height="@dimen/size_30dp"
+        android:src="@drawable/fish"
+        android:layout_marginEnd="@dimen/size_20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

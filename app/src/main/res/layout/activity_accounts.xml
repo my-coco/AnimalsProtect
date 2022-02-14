@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.accounts.AccountsActivity">
+    <ImageView
+        android:id="@+id/back_ic"
+        android:layout_width="@dimen/size_30dp"
+        android:layout_height="@dimen/size_30dp"
+        android:layout_marginStart="@dimen/size_5dp"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:src="@drawable/back_black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_41dp"
+        android:gravity="center"
+        android:text="标题"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/accounts_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="内容"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/size_34dp"
+        android:layout_marginTop="@dimen/size_18dp"
+        android:layout_marginEnd="@dimen/size_34dp"
+        android:background="@drawable/border_grayness"
+        android:minHeight="@dimen/size_161dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/accounts_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2021年11月27日"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:textColor="@color/org_grayness"
+        app:layout_constraintEnd_toEndOf="@+id/accounts_information"
+        app:layout_constraintTop_toBottomOf="@+id/accounts_information" />
+
+    <GridLayout
+        android:id="@+id/pic_grid"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:layout_marginStart="@dimen/size_34dp"
+        android:layout_marginEnd="@dimen/size_34dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/accounts_time">
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/accounts1"/>
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/accounts1"/>
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/accounts1"/>
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/accounts1"/>
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
