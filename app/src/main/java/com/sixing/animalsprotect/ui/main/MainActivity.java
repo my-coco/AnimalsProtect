@@ -1,12 +1,8 @@
 package com.sixing.animalsprotect.ui.main;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,35 +11,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.sixing.animalsprotect.R;
+import com.sixing.animalsprotect.constant.Constants;
+import com.sixing.animalsprotect.shara.SharadUtil;
 import com.sixing.animalsprotect.ui.login.LoginActivity;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView home_ic,adoption_ic,rank_ic,my_ic;
     private TextView home_tx,adoption_tx,rank_tx,my_tx;
     private Fragment adoptionFragment,homeFragment,myFragment,rankFragment;
+    private Fragment[] fragments=new Fragment[4];
     private FragmentManager fragmentManager;
     private int fragmentIndex;
     private String TAG="MainActivity";
-    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
+        SharadUtil.getInstance(this);
         login();
+        init();
         initView();
         initListener();
-        replaceFragment(homeFragment);
+        addFragment();
+        showFragment(null,homeFragment);
         changeIc(-1,0);
         fragmentIndex=0;
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 
     private void init(){
@@ -52,8 +48,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         homeFragment=new HomeFragment();
         myFragment=new MyFragment();
         rankFragment=new RankFragment();
-
-        sharedPreferences=getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        fragments[0]=homeFragment;
+        fragments[1]=adoptionFragment;
+        fragments[2]=rankFragment;
+        fragments[3]=myFragment;
     }
 
     private void initView(){
@@ -86,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.home_ic:
             case R.id.home_tx:
                 if(fragmentIndex!=0){
-                    replaceFragment(homeFragment);
+                    showFragment(fragments[fragmentIndex],homeFragment);
                     changeIc(fragmentIndex,0);
                     fragmentIndex=0;
                 }
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.adoption_ic:
             case R.id.adoption_tx:
                 if(fragmentIndex!=1){
-                    replaceFragment(adoptionFragment);
+                    showFragment(fragments[fragmentIndex],adoptionFragment);
                     changeIc(fragmentIndex,1);
                     fragmentIndex=1;
                 }
@@ -102,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.rank_ic:
             case R.id.rank_tx:
                 if(fragmentIndex!=2){
-                    replaceFragment(rankFragment);
+                    showFragment(fragments[fragmentIndex],rankFragment);
                     changeIc(fragmentIndex,2);
                     fragmentIndex=2;
                 }
@@ -110,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.my_ic:
             case R.id.my_tx:
                 if(fragmentIndex!=3){
-                    replaceFragment(myFragment);
+                    showFragment(fragments[fragmentIndex],myFragment);
                     changeIc(fragmentIndex,3);
                     fragmentIndex=3;
                 }
@@ -118,9 +116,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void addFragment(){
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment,fragment);
+        fragmentTransaction.add(R.id.fragment,adoptionFragment);
+        fragmentTransaction.add(R.id.fragment,homeFragment);
+        fragmentTransaction.add(R.id.fragment,myFragment);
+        fragmentTransaction.add(R.id.fragment,rankFragment);
+        fragmentTransaction.hide(adoptionFragment);
+        fragmentTransaction.hide(myFragment);
+        fragmentTransaction.hide(rankFragment);
+        fragmentTransaction.hide(homeFragment);
+        fragmentTransaction.commit();
+    }
+
+    private void showFragment(Fragment oldFragment,Fragment newFragment){
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        if(oldFragment!=null){
+            fragmentTransaction.hide(oldFragment);
+            Log.d(TAG, "showFragment: 1");
+        }
+        fragmentTransaction.show(newFragment);
         fragmentTransaction.commit();
     }
 
@@ -163,10 +178,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
     private void login(){
-        if(sharedPreferences.getString("user_phone"," ").equals(" ")){
+        Log.d(TAG, "login: "+SharadUtil.getInstance(this).getString(Constants.USERPHONE,null));
+        if(SharadUtil.getInstance(this).getString(Constants.USERPHONE,null)==null){
             Intent intent=new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 }

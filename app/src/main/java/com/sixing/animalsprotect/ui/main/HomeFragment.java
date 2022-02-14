@@ -2,8 +2,8 @@ package com.sixing.animalsprotect.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +18,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.sixing.animalsprotect.R;
 import com.sixing.animalsprotect.adapter.AnimalHomeAdapter;
 import com.sixing.animalsprotect.bean.AnimalHome;
-import com.sixing.animalsprotect.bean.AnimalInformation;
 import com.sixing.animalsprotect.bean.SearchResult;
+import com.sixing.animalsprotect.constant.Constants;
 import com.sixing.animalsprotect.shape.GridView;
 import com.sixing.animalsprotect.ui.animal.AnimalActivity;
 import com.sixing.animalsprotect.ui.main.viewModel.HomeViewModel;
@@ -40,9 +40,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     private Context context;
     private View.OnClickListener onClickListener=this;
     private View view;
+    private String TAG="HomeFragment";
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_home,container,false);
+        Log.d("TAG", "onCreateView: "+TAG);
         init();
         initListener();
         initCarousel();
@@ -123,8 +125,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
             case R.id.gridview:
                 Intent intent=new Intent(context, AnimalActivity.class);
                 Bundle bundle=new Bundle();
-                bundle.putString("animalId",((SearchResult)parent.getAdapter().getItem(position)).getId());
-                intent.putExtra("animalIdBundle",bundle);
+                bundle.putString(Constants.ANIMALID,((SearchResult)parent.getAdapter().getItem(position)).getId());
+                intent.putExtra(Constants.ANIMALIDBUNDLE,bundle);
                 startActivity(intent);
                 break;
         }

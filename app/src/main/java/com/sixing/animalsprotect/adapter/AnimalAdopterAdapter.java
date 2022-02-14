@@ -48,7 +48,6 @@ public class AnimalAdopterAdapter extends BaseAdapter {
         holder.imageView.setImageDrawable(context.getDrawable(R.drawable.xiaomao1));
 //        holder.imageView.setImageDrawable(iconDrawable(animalAdoption.getAnimal_pic().getAbsolutePath()));
         holder.textView1.setText(animalInformation.getName());
-        Log.d("TAG", "getView: "+animalInformation.getSurplusFood());
         holder.textView2.setText(String.valueOf(animalInformation.getSurplusFood()));
         return convertView;
     }

@@ -5,7 +5,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +17,7 @@ import com.sixing.animalsprotect.adapter.BroadcastAdapter;
 import com.sixing.animalsprotect.bean.AnimalInformation;
 import com.sixing.animalsprotect.bean.Broadcast;
 import com.sixing.animalsprotect.bean.Notice;
-import com.sixing.animalsprotect.shara.SharadPreferences;
+import com.sixing.animalsprotect.constant.Constants;
 import com.sixing.animalsprotect.ui.animal.viewmodel.AnimalModel;
 import com.sixing.animalsprotect.ui.shelter.ShelterActivity;
 
@@ -45,7 +44,7 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_animal);
         init();
         try {
-            animalId=getIntent().getBundleExtra("animalIdBundle").getString("animalId",null);
+            animalId=getIntent().getBundleExtra(Constants.ANIMALIDBUNDLE).getString(Constants.ANIMALID,null);
             initAnimalInformation(animalId);
         }catch (Exception e){
             e.printStackTrace();
@@ -163,7 +162,7 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.org_entry:
                 Intent intent=new Intent();
                 intent.setClass(this, ShelterActivity.class);
-                intent.putExtra("shelterId",shelterId);
+                intent.putExtra(Constants.SHELTERID,shelterId);
                 startActivity(intent);
                 break;  
             case R.id.back_ic:

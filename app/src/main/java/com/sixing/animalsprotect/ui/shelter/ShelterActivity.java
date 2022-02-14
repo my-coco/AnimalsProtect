@@ -22,6 +22,7 @@ import com.sixing.animalsprotect.bean.AnimalInformation;
 import com.sixing.animalsprotect.bean.Broadcast;
 import com.sixing.animalsprotect.bean.Notice;
 import com.sixing.animalsprotect.bean.ShelterInformation;
+import com.sixing.animalsprotect.constant.Constants;
 import com.sixing.animalsprotect.ui.accounts.AccountsActivity;
 import com.sixing.animalsprotect.ui.animal.AnimalActivity;
 import com.sixing.animalsprotect.ui.report.ReportActivity;
@@ -217,8 +218,8 @@ public class ShelterActivity extends AppCompatActivity implements View.OnClickLi
                     case 1:
                         intent.setClass(this, AnimalActivity.class);
                         AnimalInformation animalInformation=animalInformations.get(position);
-                        bundle.putString("animalId",animalInformation.getId());
-                        intent.putExtra("animalIdBundle",bundle);
+                        bundle.putString(Constants.ANIMALID,animalInformation.getId());
+                        intent.putExtra(Constants.ANIMALIDBUNDLE,bundle);
                         startActivity(intent);
                         break;
                     //account
@@ -228,7 +229,7 @@ public class ShelterActivity extends AppCompatActivity implements View.OnClickLi
                         bundle.putString("title",account.getTitle());
                         bundle.putString("reason",account.getReason());
                         bundle.putString("date",account.getDate());
-                        intent.putExtra("account",bundle);
+                        intent.putExtra(Constants.ACCOUNTBUNDLE,bundle);
                         startActivity(intent);
                         break;
                     //notice

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.sixing.animalsprotect.R;
 import com.sixing.animalsprotect.adapter.AnimalAdopterAdapter;
 import com.sixing.animalsprotect.bean.Adoption;
 import com.sixing.animalsprotect.bean.AnimalInformation;
+import com.sixing.animalsprotect.constant.Constants;
 import com.sixing.animalsprotect.ui.animal.AnimalActivity;
 import com.sixing.animalsprotect.ui.main.viewModel.AdoptionViewModel;
 
@@ -37,6 +39,7 @@ public class AdoptionFragment extends Fragment implements View.OnClickListener, 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_adoption,container,false);
+        Log.d("TAG", "onCreateView: "+TAG);
         init();
         initListener();
         initList();
@@ -47,7 +50,7 @@ public class AdoptionFragment extends Fragment implements View.OnClickListener, 
         adoptions=new ArrayList<>();
         viewModelProvider=new ViewModelProvider(this);
         adoptionViewModel=viewModelProvider.get(AdoptionViewModel.class);
-        sharedPreferences=getActivity().getSharedPreferences("user_info",Context.MODE_PRIVATE);
+        sharedPreferences=getActivity().getSharedPreferences(Constants.USERINFO,Context.MODE_PRIVATE);
         listView=view.findViewById(R.id.animals_list);
     }
 
@@ -55,7 +58,7 @@ public class AdoptionFragment extends Fragment implements View.OnClickListener, 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                adoptions=adoptionViewModel.getAdoptions(sharedPreferences.getString("user_phone"," "));
+                adoptions=adoptionViewModel.getAdoptions(sharedPreferences.getString(Constants.USERPHONE," "));
                 List<AnimalInformation> animalInformations=new ArrayList<>();
                 for (Adoption adoption:adoptions){
                     AnimalInformation animalInformation=new AnimalInformation();
@@ -92,8 +95,8 @@ public class AdoptionFragment extends Fragment implements View.OnClickListener, 
         switch (parent.getId()){
             case R.id.animals_list:
                 intent=new Intent(context, AnimalActivity.class);
-                bundle.putString("animalId",((AnimalInformation)parent.getAdapter().getItem(position)).getId());
-                intent.putExtra("animalIdBundle",bundle);
+                bundle.putString(Constants.ANIMALID,((AnimalInformation)parent.getAdapter().getItem(position)).getId());
+                intent.putExtra(Constants.ANIMALIDBUNDLE,bundle);
                 startActivity(intent);
                 break;
         }

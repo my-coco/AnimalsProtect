@@ -4,18 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sixing.animalsprotect.R;
 import com.sixing.animalsprotect.bean.UserInformation;
+import com.sixing.animalsprotect.constant.Constants;
+import com.sixing.animalsprotect.shara.SharadUtil;
 import com.sixing.animalsprotect.ui.login.viewmodel.LoginViewModel;
-import com.tencentcloudapi.iotvideo.v20191126.models.LogData;
+import com.sixing.animalsprotect.ui.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private ViewModelProvider viewModelProvider;
@@ -23,7 +25,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText user_phone,user_password;
     private TextView login_btn;
     private Context context;
-    private SharedPreferences sharadPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +34,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initListener();
     }
 
+
     private void init(){
         viewModelProvider=new ViewModelProvider(this);
         loginViewModel=viewModelProvider.get(LoginViewModel.class);
         context=this;
-        sharadPreferences=getSharedPreferences("user_info",Context.MODE_PRIVATE);
 
         user_password=findViewById(R.id.user_password);
         user_phone=findViewById(R.id.user_phone);
@@ -56,12 +57,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(userInformation.getUser_phone()==null){
                     Log.d("TAG", "run: 错误");
                 }else{
-                    SharedPreferences.Editor editor=sharadPreferences.edit();
-                    editor.putString("user_phone",userInformation.getUser_phone());
-                    editor.putString("user_password",userInformation.getUser_password());
-                    editor.putString("user_name",userInformation.getUser_name());
-                    editor.apply();
-                    editor.commit();
+                    SharadUtil.sharadUtil.put(Constants.USERPHONE,userInformation.getUser_phone());
+                    SharadUtil.sharadUtil.put(Constants.USERPASSWORD,userInformation.getUser_password());
+                    SharadUtil.sharadUtil.put(Constants.USERNAME,userInformation.getUser_name());
+                    Intent intent=new Intent(context, MainActivity.class);
+                    startActivity(intent);
                     finish();
                 }
             }
@@ -76,4 +76,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
 }

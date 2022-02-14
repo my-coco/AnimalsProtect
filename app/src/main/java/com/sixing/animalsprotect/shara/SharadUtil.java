@@ -8,18 +8,17 @@ import androidx.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
 
-public class SharadPreferences implements SharedPreferences {
-    private volatile static SharadPreferences sharadPreferences;
-    public SharadPreferences(String user_info, int modePrivate){}
-    public static SharadPreferences getInstance(){
-        if (sharadPreferences==null){
-            synchronized (SharadPreferences.class){
-                if (sharadPreferences==null){
-                    sharadPreferences=new SharadPreferences("user_info", Context.MODE_PRIVATE);
-                }
-            }
+public class SharadUtil implements SharedPreferences {
+    private volatile static SharedPreferences sharadPreferences;
+    public volatile static SharadUtil sharadUtil;
+    private volatile static Editor editor;
+    public static SharadUtil getInstance(Context context){
+        if (sharadUtil==null){
+            sharadUtil=new SharadUtil();
+            sharadPreferences=context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+            editor=sharadPreferences.edit();
         }
-        return sharadPreferences;
+        return sharadUtil;
     }
 
     @Override
@@ -30,58 +29,59 @@ public class SharadPreferences implements SharedPreferences {
     @Nullable
     @Override
     public String getString(String key, @Nullable String defValue) {
-        return null;
+        return sharadPreferences.getString(key,defValue);
     }
 
     @Nullable
     @Override
     public Set<String> getStringSet(String key, @Nullable Set<String> defValues) {
-        return null;
+        return sharadPreferences.getStringSet(key, defValues);
     }
 
     @Override
     public int getInt(String key, int defValue) {
-        return 0;
+        return sharadPreferences.getInt(key,defValue);
     }
 
     @Override
     public long getLong(String key, long defValue) {
-        return 0;
+        return sharadPreferences.getLong(key, defValue);
     }
 
     @Override
     public float getFloat(String key, float defValue) {
-        return 0;
+        return sharadPreferences.getFloat(key, defValue);
     }
 
     @Override
     public boolean getBoolean(String key, boolean defValue) {
-        return false;
+        return sharadPreferences.getBoolean(key, defValue);
     }
 
     @Override
     public boolean contains(String key) {
-        return false;
+        return sharadPreferences.contains(key);
     }
 
     @Override
     public Editor edit() {
-        return null;
+        return editor;
     }
 
     public <T> void put(String key, T value){
         if (value instanceof String){
-            sharadPreferences.edit().putString(key,(String) value);
+            editor.putString(key,(String) value);
         }else if (value instanceof Integer){
-            sharadPreferences.edit().putInt(key,(Integer)value);
+            editor.putInt(key,(Integer)value);
         }else if (value instanceof Float){
-            sharadPreferences.edit().putFloat(key,(Float) value);
+            editor.putFloat(key,(Float) value);
         }else if(value instanceof Boolean){
-            sharadPreferences.edit().putBoolean(key,(Boolean) value);
+            editor.putBoolean(key,(Boolean) value);
         }else if (value instanceof Long){
-            sharadPreferences.edit().putLong(key,(Long) value);
+            editor.putLong(key,(Long) value);
         }
-        sharadPreferences.edit().commit();
+        editor.apply();
+        editor.commit();
     }
 
     @Override

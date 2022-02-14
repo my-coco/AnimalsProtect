@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sixing.animalsprotect.R;
+import com.sixing.animalsprotect.constant.Constants;
 
 public class AccountsActivity extends AppCompatActivity implements View.OnClickListener{
     private ImageView back_ic;
@@ -35,7 +36,7 @@ public class AccountsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initInformation(){
-        Bundle bundle=intent.getBundleExtra("account");
+        Bundle bundle=intent.getBundleExtra(Constants.ACCOUNTBUNDLE);
         title.setText(bundle.getString("title"));
         accounts_information.setText(bundle.getString("reason"));
         accounts_time.setText(bundle.getString("date"));

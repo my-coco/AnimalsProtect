@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.sixing.animalsprotect.R;
+import com.sixing.animalsprotect.constant.Constants;
 
 public class MyFragment extends Fragment {
     private SharedPreferences sharedPreferences;
@@ -21,14 +22,15 @@ public class MyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_my,container,false);
+        Log.d("TAG", "onCreateView: "+TAG);
         init();
         return view;
     }
 
     private void init(){
-        sharedPreferences= getActivity().getSharedPreferences("user_info", Context.MODE_PRIVATE);
-        Log.d(TAG, "init: "+sharedPreferences.getString("user_name","默认昵称")+"  "+sharedPreferences.getString("user_phone","空"));
+        sharedPreferences= getActivity().getSharedPreferences(Constants.USERINFO, Context.MODE_PRIVATE);
+        Log.d(TAG, "init: "+sharedPreferences.getString(Constants.USERNAME,"默认昵称")+"  "+sharedPreferences.getString(Constants.USERPHONE,"空"));
         user_name=view.findViewById(R.id.user_name);
-        user_name.setText(sharedPreferences.getString("user_name","默认昵称"));
+        user_name.setText(sharedPreferences.getString(Constants.USERNAME,"默认昵称"));
     }
 }

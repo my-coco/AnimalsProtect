@@ -5,9 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -18,8 +16,8 @@ import android.widget.TextView;
 import com.sixing.animalsprotect.R;
 import com.sixing.animalsprotect.adapter.AnimalHomeAdapter;
 import com.sixing.animalsprotect.bean.AnimalHome;
-import com.sixing.animalsprotect.bean.AnimalRank;
 import com.sixing.animalsprotect.bean.SearchResult;
+import com.sixing.animalsprotect.constant.Constants;
 import com.sixing.animalsprotect.ui.animal.AnimalActivity;
 import com.sixing.animalsprotect.ui.search.viewmodel.SearchResultViewModel;
 import com.sixing.animalsprotect.ui.shelter.ShelterActivity;
@@ -107,12 +105,12 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
                 if (searchResult.getIsAnimal()==1){
                     Intent intent=new Intent(this, AnimalActivity.class);
                     Bundle bundle=new Bundle();
-                    bundle.putString("animalId",searchResult.getId());
-                    intent.putExtra("animalIdBundle",bundle);
+                    bundle.putString(Constants.ANIMALID,searchResult.getId());
+                    intent.putExtra(Constants.ANIMALIDBUNDLE,bundle);
                     startActivity(intent);
                 }else {
                     Intent intent=new Intent(this, ShelterActivity.class);
-                    intent.putExtra("shelterId",searchResult.getId());
+                    intent.putExtra(Constants.SHELTERID,searchResult.getId());
                     startActivity(intent);
                 }
                 break;

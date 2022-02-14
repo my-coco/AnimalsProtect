@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.sixing.animalsprotect.R;
@@ -22,8 +21,8 @@ import com.sixing.animalsprotect.adapter.AddressAdapter;
 import com.sixing.animalsprotect.adapter.AnimalRankAdapter;
 import com.sixing.animalsprotect.bean.AnimalInformation;
 import com.sixing.animalsprotect.bean.AnimalRank;
-import com.sixing.animalsprotect.bean.HttpResponse;
 import com.sixing.animalsprotect.bean.HttpResponseGhost;
+import com.sixing.animalsprotect.constant.Constants;
 import com.sixing.animalsprotect.ui.animal.AnimalActivity;
 import com.sixing.animalsprotect.ui.main.viewModel.RankViewModel;
 
@@ -49,6 +48,7 @@ public class RankFragment extends Fragment implements View.OnClickListener, Adap
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_rank,container,false);
+        Log.d("TAG", "onCreateView: "+TAG);
         init();
         initSpinner();
         initListener();
@@ -129,8 +129,8 @@ public class RankFragment extends Fragment implements View.OnClickListener, Adap
                     intent.setClass(context, AnimalActivity.class);
                     Bundle bundle=new Bundle();
                     AnimalRank animalRank=(AnimalRank) parent.getAdapter().getItem(position);
-                    bundle.putString("animalId",animalRank.getAnimal_id());
-                    intent.putExtra("animalIdBundle",bundle);
+                    bundle.putString(Constants.ANIMALID,animalRank.getAnimal_id());
+                    intent.putExtra(Constants.ANIMALIDBUNDLE,bundle);
                     startActivity(intent);
                 }catch (Exception e){
                     e.printStackTrace();
