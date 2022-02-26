@@ -1,5 +1,6 @@
 package com.sixing.animalsprotect.ui.login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
@@ -7,7 +8,10 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,7 +19,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sixing.animalsprotect.R;
 import com.sixing.animalsprotect.bean.UserInformation;
@@ -36,6 +42,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ConstraintLayout load_layout,login_layout;
     private ConstraintLayout rootView;
     private float posX,posY,curPosX,curPosY;
+    private ImageView load_anim;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         viewModelProvider=new ViewModelProvider(this);
         loginViewModel=viewModelProvider.get(LoginViewModel.class);
         context=this;
+        handler=new Handler(callback);
 
         login=findViewById(R.id.login);
         load=findViewById(R.id.load);
@@ -68,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         token_tx=findViewById(R.id.token_tx);
         sure_btn=findViewById(R.id.sure_btn);
         rootView=findViewById(R.id.rootView);
+        load_anim=findViewById(R.id.load_anim);
     }
 
     private void initAnima(){
@@ -95,20 +105,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void login(){
+        load_anim.setVisibility(View.VISIBLE);
+        ((AnimationDrawable)load_anim.getBackground()).start();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 UserInformation userInformation=loginViewModel.getUserInfo(name_ed.getText().toString(),password_ed.getText().toString());
-                if(userInformation.getUser_phone()==null){
-                    Log.d("TAG", "run: 错误");
+                handler.sendEmptyMessage(1);
+                if(userInformation!=null){
+                    if(userInformation.getUser_phone()==null){
+                        handler.sendEmptyMessage(0);
+                    }else{
+                        SharadUtil.sharadUtil.put(Constants.USERPHONE,userInformation.getUser_phone());
+                        SharadUtil.sharadUtil.put(Constants.USERPASSWORD,userInformation.getUser_password());
+                        SharadUtil.sharadUtil.put(Constants.USERNAME,userInformation.getUser_name());
+                        Intent intent=new Intent(context, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }else{
-                    SharadUtil.sharadUtil.put(Constants.USERPHONE,userInformation.getUser_phone());
-                    SharadUtil.sharadUtil.put(Constants.USERPASSWORD,userInformation.getUser_password());
-                    SharadUtil.sharadUtil.put(Constants.USERNAME,userInformation.getUser_name());
-                    Intent intent=new Intent(context, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    handler.sendEmptyMessage(2);
                 }
+
             }
         }).start();
     }
@@ -222,4 +240,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         return true;
     }
+
+    private Handler.Callback callback=new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message msg) {
+            switch (msg.what){
+                case 0:
+                    Toast.makeText(context,"账号或密码错误",Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    load_anim.setVisibility(View.GONE);
+                    ((AnimationDrawable)load_anim.getBackground()).stop();
+                    break;
+                case 2:
+                    Toast.makeText(context,"网络错误",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+            return false;
+        }
+    };
 }

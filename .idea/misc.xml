@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/blackcat.xml" value="0.27" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/boder_radius_10.xml" value="0.266" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/boder_radius_16.xml" value="0.266" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/loading_anim.xml" value="0.27" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/fragment_home.xml" value="0.223731884057971" />
       </map>
     </option>
   </component>

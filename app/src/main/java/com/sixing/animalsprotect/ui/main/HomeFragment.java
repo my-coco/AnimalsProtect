@@ -2,14 +2,20 @@ package com.sixing.animalsprotect.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.helper.widget.Carousel;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
@@ -28,7 +34,7 @@ import com.sixing.animalsprotect.ui.search.SearchActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class HomeFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener,View.OnTouchListener ,View.OnFocusChangeListener{
     private MotionLayout motionLayout;
     private EditText search_bar;
     private AnimalHomeAdapter animalHomeAdapter;
@@ -39,8 +45,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     private Carousel carousel;
     private Context context;
     private View.OnClickListener onClickListener=this;
+    private ImageView load_anim;
     private View view;
     private String TAG="HomeFragment";
+    private AnimationDrawable load_animdrawable;
+    private Handler handler;
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_home,container,false);
@@ -64,12 +73,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         carousel=view.findViewById(R.id.carousel);
         gridview=view.findViewById(R.id.gridview);
         search_bar=view.findViewById(R.id.search_bar);
+        load_anim=view.findViewById(R.id.load_anim);
+
         viewModelProvider=new ViewModelProvider(this);
         homeViewModel=viewModelProvider.get(HomeViewModel.class);
+
+        load_animdrawable=(AnimationDrawable)load_anim.getBackground();
+
+        handler=new Handler(callback);
     }
 
     private void initListener(){
-        search_bar.setOnClickListener(this);
+        search_bar.setOnTouchListener(this);
         gridview.setOnItemClickListener(this);
     }
 
@@ -93,6 +108,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     }
 
     private void initGridView(){
+        load_anim.setVisibility(View.VISIBLE);
+        load_animdrawable.start();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -102,6 +119,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
                     @Override
                     public void run() {
                         gridview.setAdapter(animalHomeAdapter);
+                        handler.sendEmptyMessage(1);
                     }
                 });
             }
@@ -111,10 +129,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.search_bar:
-                Intent intent=new Intent(context, SearchActivity.class);
-                startActivity(intent);
-                break;
+
         }
     }
 
@@ -131,4 +146,39 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
                 break;
         }
     }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (v.getId()){
+            case R.id.search_bar:
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_UP:
+                        Intent intent=new Intent(context, SearchActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        switch (v.getId()){
+
+        }
+    }
+
+    private Handler.Callback callback=new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message msg) {
+            switch (msg.what){
+                case 1:
+                    load_anim.setVisibility(View.GONE);
+                    load_animdrawable.stop();
+                    break;
+            }
+            return false;
+        }
+    };
 }

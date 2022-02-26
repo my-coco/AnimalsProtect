@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/blackcat" android:duration="500"/>
+    <item android:drawable="@drawable/daimao" android:duration="500"/>
+    <item android:drawable="@drawable/daju" android:duration="500"/>
+    <item android:drawable="@drawable/jiafei" android:duration="500"/>
+    <item android:drawable="@drawable/lanbai" android:duration="500"/>
+    <item android:drawable="@drawable/lanmao" android:duration="500"/>
+    <item android:drawable="@drawable/lihua" android:duration="500"/>
+    <item android:drawable="@drawable/nainiu" android:duration="500"/>
+    <item android:drawable="@drawable/sanhua" android:duration="500"/>
+    <item android:drawable="@drawable/xianluo" android:duration="500"/>
+</animation-list>
