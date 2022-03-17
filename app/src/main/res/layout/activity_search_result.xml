@@ -57,20 +57,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/back_ic" />
 
-        <com.sixing.animalsprotect.shape.GridView
-            android:id="@+id/gridview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
-            android:layout_marginEnd="21dp"
-            android:gravity="center_horizontal"
-            android:numColumns="2"
+        <com.sixing.animalsprotect.widget.MyRecycleView
+            android:id="@+id/recyclerView"
+            android:layout_marginTop="30dp"
             android:scrollbars="none"
-            android:layout_marginTop="@dimen/size_30dp"
-            android:verticalSpacing="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@+id/search_bar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -60,20 +60,22 @@ public class AdoptionFragment extends Fragment implements View.OnClickListener, 
             public void run() {
                 adoptions=adoptionViewModel.getAdoptions(sharedPreferences.getString(Constants.USERPHONE," "));
                 List<AnimalInformation> animalInformations=new ArrayList<>();
-                for (Adoption adoption:adoptions){
-                    AnimalInformation animalInformation=new AnimalInformation();
-                    animalInformation.setName(adoption.getAnimal_name());
-                    animalInformation.setId(adoption.getAnimal_id());
-                    animalInformation.setSurplusFood(adoption.getSurplusFood());
-                    animalInformations.add(animalInformation);
-                }
-                animalAdopterAdapter=new AnimalAdopterAdapter(context,animalInformations,onClickListener);
-                listView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        listView.setAdapter(animalAdopterAdapter);
+                if(adoptions!=null){
+                    for (Adoption adoption:adoptions){
+                        AnimalInformation animalInformation=new AnimalInformation();
+                        animalInformation.setName(adoption.getAnimal_name());
+                        animalInformation.setId(adoption.getAnimal_id());
+                        animalInformation.setSurplusFood(adoption.getSurplusFood());
+                        animalInformations.add(animalInformation);
                     }
-                });
+                    animalAdopterAdapter=new AnimalAdopterAdapter(context,animalInformations,onClickListener);
+                    listView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            listView.setAdapter(animalAdopterAdapter);
+                        }
+                    });
+                }
             }
         }).start();
 

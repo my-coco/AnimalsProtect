@@ -17,12 +17,10 @@ public class AnimalRankAdapter extends BaseAdapter {
 
     private List<AnimalRank> animalRanks;
     private Context context;
-    private View.OnClickListener onClickListener;
 
-    public AnimalRankAdapter(Context context, List<AnimalRank> animalRanks, View.OnClickListener onClickListener){
+    public AnimalRankAdapter(Context context, List<AnimalRank> animalRanks){
         this.animalRanks=animalRanks;
         this.context=context;
-        this.onClickListener=onClickListener;
     }
 
     @Override
@@ -50,7 +48,6 @@ public class AnimalRankAdapter extends BaseAdapter {
             hodler.animal_pic=convertView.findViewById(R.id.animal_rank_pic);
             hodler.animal_name=convertView.findViewById(R.id.animal_name);
             hodler.animal_votes=convertView.findViewById(R.id.animal_votes);
-            hodler.animal_rank_ic=convertView.findViewById(R.id.animal_rank_ic);
             hodler.animal_rank_tx=convertView.findViewById(R.id.animal_rank_tx);
             convertView.setTag(hodler);
         }else{
@@ -59,25 +56,7 @@ public class AnimalRankAdapter extends BaseAdapter {
         hodler.animal_pic.setImageDrawable(animalRank.getAnimal_pic());
         hodler.animal_name.setText(animalRank.getAnimal_name());
         hodler.animal_votes.setText(animalRank.getAnimal_votes());
-        if(position>=3){
-            hodler.animal_rank_tx.setVisibility(View.VISIBLE);
-            hodler.animal_rank_ic.setVisibility(View.GONE);
-            hodler.animal_rank_tx.setText(animalRank.getAnimal_rank());
-        }else{
-            hodler.animal_rank_ic.setVisibility(View.VISIBLE);
-            hodler.animal_rank_tx.setVisibility(View.GONE);
-            switch (position){
-                case 0:
-                    hodler.animal_rank_ic.setImageDrawable(context.getDrawable(R.drawable.frist));
-                    break;
-                case 1:
-                    hodler.animal_rank_ic.setImageDrawable(context.getDrawable(R.drawable.second));
-                    break;
-                case 2:
-                    hodler.animal_rank_ic.setImageDrawable(context.getDrawable(R.drawable.third));
-                    break;
-            }
-        }
+        hodler.animal_rank_tx.setText(animalRank.getAnimal_rank());
 
         return convertView;
     }
@@ -87,6 +66,5 @@ public class AnimalRankAdapter extends BaseAdapter {
         TextView animal_name;
         TextView animal_votes;
         TextView animal_rank_tx;
-        ImageView animal_rank_ic;
     }
 }

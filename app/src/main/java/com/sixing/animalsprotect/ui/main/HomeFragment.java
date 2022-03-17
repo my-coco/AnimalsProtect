@@ -20,25 +20,24 @@ import androidx.constraintlayout.helper.widget.Carousel;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.sixing.animalsprotect.R;
-import com.sixing.animalsprotect.adapter.AnimalHomeAdapter;
+import com.sixing.animalsprotect.adapter.AnimalAdapter;
 import com.sixing.animalsprotect.bean.AnimalHome;
 import com.sixing.animalsprotect.bean.SearchResult;
-import com.sixing.animalsprotect.constant.Constants;
-import com.sixing.animalsprotect.shape.GridView;
-import com.sixing.animalsprotect.ui.animal.AnimalActivity;
 import com.sixing.animalsprotect.ui.main.viewModel.HomeViewModel;
 import com.sixing.animalsprotect.ui.search.SearchActivity;
+import com.sixing.animalsprotect.widget.MyRecycleView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener,View.OnTouchListener ,View.OnFocusChangeListener{
+public class HomeFragment extends Fragment implements View.OnClickListener,View.OnTouchListener ,View.OnFocusChangeListener{
     private MotionLayout motionLayout;
     private EditText search_bar;
-    private AnimalHomeAdapter animalHomeAdapter;
-    private GridView gridview;
+    private AnimalAdapter animalAdapter;
+    private MyRecycleView recyclerView;
     private List<AnimalHome> animalHomes;
     private ViewModelProvider viewModelProvider;
     private HomeViewModel homeViewModel;
@@ -71,7 +70,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         animalHomes=new ArrayList<>();
         motionLayout=view.findViewById(R.id.motion);
         carousel=view.findViewById(R.id.carousel);
-        gridview=view.findViewById(R.id.gridview);
+        recyclerView=view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         search_bar=view.findViewById(R.id.search_bar);
         load_anim=view.findViewById(R.id.load_anim);
 
@@ -85,7 +85,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
 
     private void initListener(){
         search_bar.setOnTouchListener(this);
-        gridview.setOnItemClickListener(this);
     }
 
     public void initCarousel(){
@@ -114,11 +113,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
             @Override
             public void run() {
                 List<SearchResult> searchResults=homeViewModel.getSomeAnimals();
-                animalHomeAdapter=new AnimalHomeAdapter(context,searchResults,onClickListener);
-                gridview.post(new Runnable() {
+                animalAdapter=new  AnimalAdapter(searchResults,context);
+                recyclerView.post(new Runnable() {
                     @Override
                     public void run() {
-                        gridview.setAdapter(animalHomeAdapter);
+                        recyclerView.setAdapter(animalAdapter);
                         handler.sendEmptyMessage(1);
                     }
                 });
@@ -133,19 +132,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         }
     }
 
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()){
-            case R.id.gridview:
-                Intent intent=new Intent(context, AnimalActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putString(Constants.ANIMALID,((SearchResult)parent.getAdapter().getItem(position)).getId());
-                intent.putExtra(Constants.ANIMALIDBUNDLE,bundle);
-                startActivity(intent);
-                break;
-        }
-    }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {

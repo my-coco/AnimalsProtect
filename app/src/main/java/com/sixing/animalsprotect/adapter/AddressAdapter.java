@@ -1,9 +1,6 @@
 package com.sixing.animalsprotect.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.ColorSpace;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sixing.animalsprotect.R;
-import com.sixing.animalsprotect.ui.main.RankFragment;
 
 import java.util.List;
 

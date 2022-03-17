@@ -2,6 +2,8 @@ package com.sixing.animalsprotect.ui.search;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sixing.animalsprotect.R;
+import com.sixing.animalsprotect.adapter.AnimalAdapter;
 import com.sixing.animalsprotect.adapter.AnimalHomeAdapter;
 import com.sixing.animalsprotect.bean.AnimalHome;
 import com.sixing.animalsprotect.bean.SearchResult;
@@ -21,15 +24,15 @@ import com.sixing.animalsprotect.constant.Constants;
 import com.sixing.animalsprotect.ui.animal.AnimalActivity;
 import com.sixing.animalsprotect.ui.search.viewmodel.SearchResultViewModel;
 import com.sixing.animalsprotect.ui.shelter.ShelterActivity;
+import com.sixing.animalsprotect.widget.MyRecycleView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class SearchResultActivity extends AppCompatActivity implements View.OnClickListener{
     private ImageView back_ic;
-    private GridView gridview;
-    private List<AnimalHome> animalHomes;
-    private AnimalHomeAdapter animalHomeAdapter;
+    private MyRecycleView recyclerView;
+    private AnimalAdapter animalAdapter;
     private Intent intent;
     private String key_words;
     private ViewModelProvider viewModelProvider;
@@ -52,9 +55,9 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         key_words=intent.getStringExtra("key");
         viewModelProvider=new ViewModelProvider(this);
         resultViewModel=viewModelProvider.get(SearchResultViewModel.class);
-        animalHomes=new ArrayList<>();
         back_ic=findViewById(R.id.back_ic);
-        gridview=findViewById(R.id.gridview);
+        recyclerView=findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         search_bar=findViewById(R.id.search_bar);
         if (!(key_words.equals("animal_all")||key_words.equals("shelter_all"))){
             search_bar.setText(key_words);
@@ -64,7 +67,6 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
 
     private void initListener(){
         back_ic.setOnClickListener(this);
-        gridview.setOnItemClickListener(this);
         sure_btn.setOnClickListener(this);
     }
 
@@ -73,11 +75,11 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void run() {
                 List<SearchResult> searchResults=resultViewModel.getAnimalorShelter(key);
-                animalHomeAdapter=new AnimalHomeAdapter(context,searchResults,onClickListener);
-                gridview.post(new Runnable() {
+                animalAdapter=new AnimalAdapter(searchResults,context);
+                recyclerView.post(new Runnable() {
                     @Override
                     public void run() {
-                        gridview.setAdapter(animalHomeAdapter);
+                        recyclerView.setAdapter(animalAdapter);
                     }
                 });
             }
@@ -97,23 +99,4 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()){
-            case R.id.gridview:
-                SearchResult searchResult= (SearchResult) parent.getAdapter().getItem(position);
-                if (searchResult.getIsAnimal()==1){
-                    Intent intent=new Intent(this, AnimalActivity.class);
-                    Bundle bundle=new Bundle();
-                    bundle.putString(Constants.ANIMALID,searchResult.getId());
-                    intent.putExtra(Constants.ANIMALIDBUNDLE,bundle);
-                    startActivity(intent);
-                }else {
-                    Intent intent=new Intent(this, ShelterActivity.class);
-                    intent.putExtra(Constants.SHELTERID,searchResult.getId());
-                    startActivity(intent);
-                }
-                break;
-        }
-    }
 }

@@ -9,4 +9,7 @@ object Constants {
     const val USERNAME:String="user_name";
     const val ANIMALIDBUNDLE:String="animalIdBundle";
     const val ACCOUNTBUNDLE:String="accountBundle";
+    const val LOCATIONPROVINCE:String="locationProvince"
+    const val LOCATIONCITY:String="locationCity"
+    const val LOCATIONCOUNTRY:String="locationCountry"
 }

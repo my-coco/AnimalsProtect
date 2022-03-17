@@ -1,70 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:scrollbars="none"
     android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/user_bg"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_315dp"
-        android:src="@drawable/xiaomao1"
-        android:scaleType="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/setting_ic"
-        android:layout_width="@dimen/size_24dp"
-        android:layout_height="@dimen/size_24dp"
-        android:layout_marginTop="@dimen/size_8dp"
-        android:layout_marginEnd="@dimen/size_8dp"
-        android:src="@drawable/icon_setting"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/user_bg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_315dp"
+            android:src="@drawable/xiaomao1"
+            android:scaleType="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.sixing.animalsprotect.shape.CircleView
-        android:id="@+id/circleView"
-        android:layout_width="@dimen/size_79dp"
-        android:layout_height="@dimen/size_79dp"
-        android:layout_marginStart="@dimen/size_20dp"
-        android:layout_marginBottom="@dimen/size_12dp"
-        android:src="@drawable/iu"
-        app:layout_constraintBottom_toBottomOf="@+id/user_bg"
-        app:layout_constraintStart_toStartOf="@+id/user_bg" />
+        <ImageView
+            android:id="@+id/setting_ic"
+            android:layout_width="@dimen/size_38dp"
+            android:layout_height="@dimen/size_38dp"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:layout_marginEnd="@dimen/size_8dp"
+            android:padding="4dp"
+            android:src="@drawable/icon_setting"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_33dp"
-        android:text="用户昵称"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/user_sex"
-        app:layout_constraintStart_toEndOf="@+id/circleView"
-        app:layout_constraintTop_toTopOf="@+id/user_sex" />
+        <com.sixing.animalsprotect.widget.CircleView
+            android:id="@+id/circleView"
+            android:layout_width="@dimen/size_79dp"
+            android:layout_height="@dimen/size_79dp"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginBottom="@dimen/size_25dp"
+            android:src="@drawable/iu"
+            app:layout_constraintBottom_toBottomOf="@+id/user_bg"
+            app:layout_constraintStart_toStartOf="@+id/user_bg" />
 
-    <ImageView
-        android:id="@+id/user_sex"
-        android:layout_width="@dimen/size_24dp"
-        android:layout_height="@dimen/size_24dp"
-        android:layout_marginStart="@dimen/size_6dp"
-        android:layout_marginTop="@dimen/size_25dp"
-        android:src="@drawable/nan"
-        app:layout_constraintStart_toEndOf="@+id/circleView"
-        app:layout_constraintTop_toTopOf="@+id/circleView" />
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_33dp"
+            android:text="用户昵称"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/user_sex"
+            app:layout_constraintStart_toEndOf="@+id/circleView"
+            app:layout_constraintTop_toTopOf="@+id/user_sex" />
 
-    <TextView
-        android:id="@+id/user_words"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_9dp"
-        android:textColor="@color/user_words_grayness"
-        android:text="快把二哈带走!!"
-        android:textSize="@dimen/font_13sp"
-        app:layout_constraintStart_toStartOf="@+id/user_sex"
-        app:layout_constraintTop_toBottomOf="@+id/user_sex" />
+        <ImageView
+            android:id="@+id/user_sex"
+            android:layout_width="@dimen/size_24dp"
+            android:layout_height="@dimen/size_24dp"
+            android:layout_marginStart="@dimen/size_6dp"
+            android:layout_marginTop="@dimen/size_25dp"
+            android:src="@drawable/nan"
+            app:layout_constraintStart_toEndOf="@+id/circleView"
+            app:layout_constraintTop_toTopOf="@+id/circleView" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/user_words"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_9dp"
+            android:textColor="@color/user_words_grayness"
+            android:text="快把二哈带走!!"
+            android:textSize="@dimen/font_13sp"
+            app:layout_constraintStart_toStartOf="@+id/user_sex"
+            app:layout_constraintTop_toBottomOf="@+id/user_sex" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/boder_radius_18_tl_tr"
+            android:layout_marginTop="-18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_bg">
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/love_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="@dimen/size_30dp"
+                        android:layout_height="@dimen/size_30dp"
+                        android:src="@drawable/heart2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.289"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_10dp"
+                        android:text="喜欢"
+                        android:textColor="#d81e06"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
+                        app:layout_constraintStart_toEndOf="@+id/imageView12"
+                        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+                    <TextView
+                        android:id="@+id/love_line"
+                        android:layout_width="50dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="8dp"
+                        android:background="#d81e06"
+                        app:layout_constraintEnd_toEndOf="@+id/textView8"
+                        app:layout_constraintStart_toStartOf="@+id/imageView12"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/saw_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageView13"
+                        android:layout_width="@dimen/size_30dp"
+                        android:layout_height="@dimen/size_30dp"
+                        android:src="@drawable/eye"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.289"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_10dp"
+                        android:text="看过"
+                        android:textColor="#d81e06"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView13"
+                        app:layout_constraintStart_toEndOf="@+id/imageView13"
+                        app:layout_constraintTop_toTopOf="@+id/imageView13" />
+
+                    <TextView
+                        android:id="@+id/saw_line"
+                        android:layout_width="50dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="8dp"
+                        android:background="#d81e06"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/textView9"
+                        app:layout_constraintStart_toStartOf="@+id/imageView13"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <com.sixing.animalsprotect.widget.MyRecycleView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:scrollbars="none"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

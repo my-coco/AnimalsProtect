@@ -21,7 +21,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpRepository implements HttpApi{
-    private String baseUrl="http://192.168.1.101:8080";
+    private String baseUrl="http://192.168.162.234:8080";
 
     @Override
     public Call<HttpResponseGhost<List<HttpResponseGhost.AddressInfor>>> getAddress(int uid,String appkey,String parentId) {

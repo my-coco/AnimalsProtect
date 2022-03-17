@@ -2,6 +2,7 @@ package com.sixing.animalsprotect.ui.search;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sixing.animalsprotect.R;
 import com.sixing.animalsprotect.adapter.HotAdapter;
@@ -22,6 +24,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
     private ListView hot_list;
     private ImageView back_ic;
     private HotAdapter hotAdapter;
+    private Context context;
     private EditText search_bar;
     private TextView sure_btn,org_btn,animals_btn;
     @Override
@@ -40,6 +43,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         animals_btn=findViewById(R.id.animals_btn);
         org_btn=findViewById(R.id.org_btn);
         search_bar=findViewById(R.id.search_bar);
+        context=this;
     }
 
     private void initListener(){
@@ -64,8 +68,9 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()){
             case R.id.list:
-                Intent intent=new Intent(this, AnimalActivity.class);
-                startActivity(intent);
+//                Intent intent=new Intent(this, AnimalActivity.class);
+//                startActivity(intent);
+                Toast.makeText(context,"该功能敬请期待",Toast.LENGTH_SHORT).show();
                 break;
         }
     }

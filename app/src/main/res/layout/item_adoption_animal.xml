@@ -5,7 +5,7 @@
     android:layout_height="@dimen/size_84dp"
     android:background="@drawable/border_grayness">
 
-    <com.sixing.animalsprotect.shape.CircleView
+    <com.sixing.animalsprotect.widget.CircleView
         android:id="@+id/animal_pic"
         android:layout_width="@dimen/size_55dp"
         android:layout_height="@dimen/size_55dp"

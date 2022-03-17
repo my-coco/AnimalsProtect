@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_43dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/province"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/city"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/county"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/podium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+            <com.sixing.animalsprotect.widget.HexagonView
+                android:id="@+id/hexagonView_1"
+                android:layout_width="81dp"
+                android:layout_height="81dp"
+                android:layout_marginTop="50dp"
+                android:padding="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/xiaomao1"
+                app:borderColor="#FFE500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="@dimen/size_30dp"
+                android:layout_height="@dimen/size_30dp"
+                android:layout_marginBottom="-10dp"
+                android:src="@drawable/first"
+                app:layout_constraintBottom_toBottomOf="@+id/hexagonView_1"
+                app:layout_constraintEnd_toEndOf="@+id/hexagonView_1"
+                app:layout_constraintStart_toStartOf="@+id/hexagonView_1" />
+
+            <TextView
+                android:id="@+id/sum_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView9"
+                app:layout_constraintStart_toStartOf="@+id/imageView9"
+                app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+            <com.sixing.animalsprotect.widget.HexagonView
+                android:id="@+id/hexagonView_2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="32dp"
+                android:padding="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/xiaomao1"
+                app:borderColor="#C8C8C8"
+                app:layout_constraintEnd_toStartOf="@+id/hexagonView_1"
+                app:layout_constraintTop_toTopOf="@+id/hexagonView_1" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="@dimen/size_25dp"
+                android:layout_height="@dimen/size_25dp"
+                android:layout_marginBottom="-9dp"
+                android:src="@drawable/second"
+                app:layout_constraintBottom_toBottomOf="@+id/hexagonView_2"
+                app:layout_constraintEnd_toEndOf="@+id/hexagonView_2"
+                app:layout_constraintStart_toStartOf="@+id/hexagonView_2" />
+
+            <TextView
+                android:id="@+id/sum_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView10"
+                app:layout_constraintStart_toStartOf="@+id/imageView10"
+                app:layout_constraintTop_toBottomOf="@+id/hexagonView_2" />
+
+            <com.sixing.animalsprotect.widget.HexagonView
+                android:id="@+id/hexagonView_3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="40dp"
+                android:padding="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/xiaomao1"
+                app:borderColor="#E68900"
+                app:layout_constraintStart_toEndOf="@+id/hexagonView_1"
+                app:layout_constraintTop_toTopOf="@+id/hexagonView_1" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="@dimen/size_25dp"
+                android:layout_height="@dimen/size_25dp"
+                android:layout_marginBottom="-9dp"
+                android:src="@drawable/third"
+                app:layout_constraintBottom_toBottomOf="@+id/hexagonView_3"
+                app:layout_constraintEnd_toEndOf="@+id/hexagonView_3"
+                app:layout_constraintStart_toStartOf="@+id/hexagonView_3" />
+
+            <TextView
+                android:id="@+id/sum_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView11"
+                app:layout_constraintStart_toStartOf="@+id/imageView11"
+                app:layout_constraintTop_toBottomOf="@+id/hexagonView_3" />
+            <com.sixing.animalsprotect.widget.MyListView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:divider="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/locatBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#33050505"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/close_logcat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="250dp"/>
+        <LinearLayout
+            android:id="@+id/locatLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/boder_radius_18_tl_tr"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/size_18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ListView
+                android:id="@+id/province_list"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:divider="@android:color/transparent"
+                android:scrollbars="none"
+                android:visibility="gone" />
+
+            <ListView
+                android:id="@+id/city_list"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scrollbars="none"
+                android:divider="@android:color/transparent"
+                android:visibility="gone" />
+
+            <ListView
+                android:id="@+id/county_list"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:divider="@android:color/transparent"
+                android:scrollbars="none"
+                android:visibility="gone" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

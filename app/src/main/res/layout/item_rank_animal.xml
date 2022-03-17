@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/border_radius_10"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/size_60dp">
+    android:layout_height="@dimen/size_80dp">
 
-    <com.sixing.animalsprotect.shape.CircleView
+    <com.sixing.animalsprotect.widget.CircleView
         android:id="@+id/animal_rank_pic"
-        android:layout_width="@dimen/size_40dp"
-        android:layout_height="@dimen/size_40dp"
-        android:src="@drawable/xiaomao1"
+        android:layout_width="@dimen/size_55dp"
+        android:layout_height="@dimen/size_55dp"
         android:scaleType="centerCrop"
-        android:layout_marginStart="@dimen/size_16dp"
+        android:src="@drawable/xiaomao1"
+        android:layout_marginLeft="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/animal_rank_tx"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -32,7 +31,7 @@
         android:id="@+id/animal_votes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/size_64dp"
+        android:layout_marginEnd="44dp"
         android:text="256"
         android:textColor="@color/animal_votes"
         android:textSize="@dimen/font_16sp"
@@ -44,23 +43,22 @@
         android:id="@+id/animal_rank_tx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/size_12dp"
-        android:visibility="gone"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_24sp"
+        android:text="2"
+        android:layout_marginLeft="20dp"
+        android:textColor="#FF5733"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/animal_rank_ic"
-        android:layout_width="@dimen/size_40dp"
-        android:layout_height="@dimen/size_40dp"
-        android:src="@drawable/frist"
-        android:visibility="gone"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/broadcast_commit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

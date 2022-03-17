@@ -53,25 +53,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bar" />
 
+    <ImageView
+        android:layout_width="302dp"
+        android:layout_height="118dp"
+        android:src="@drawable/entrance"
+        app:layout_constraintBottom_toBottomOf="@+id/org_btn"
+        app:layout_constraintEnd_toEndOf="@+id/org_btn"
+        app:layout_constraintStart_toStartOf="@+id/org_btn"
+        app:layout_constraintTop_toTopOf="@+id/org_btn" />
+
     <TextView
         android:id="@+id/org_btn"
-        android:layout_width="@dimen/size_328dp"
-        android:layout_height="@dimen/size_193dp"
+        android:layout_width="302dp"
+        android:layout_height="118dp"
         android:gravity="center"
         android:text="流浪动物收容机构"
-        android:background="@drawable/border_radius_14"
+        android:textColor="#DB5A5A"
         android:layout_marginTop="@dimen/size_60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list" />
 
+    <ImageView
+        android:layout_width="302dp"
+        android:layout_height="118dp"
+        android:src="@drawable/entrance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/animals_btn"
+        app:layout_constraintStart_toStartOf="@+id/animals_btn"
+        app:layout_constraintTop_toTopOf="@+id/animals_btn" />
     <TextView
         android:id="@+id/animals_btn"
-        android:layout_width="@dimen/size_328dp"
-        android:layout_height="@dimen/size_193dp"
+        android:layout_width="302dp"
+        android:layout_height="118dp"
         android:gravity="center"
         android:text="小动物们"
-        android:background="@drawable/border_radius_14"
+        android:textColor="#DB5A5A"
         android:layout_marginTop="@dimen/size_40dp"
         app:layout_constraintEnd_toEndOf="@+id/org_btn"
         app:layout_constraintStart_toStartOf="@+id/org_btn"

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/login_background" />
+
+    <ImageView
+        android:id="@+id/back_ic"
+        android:layout_width="@dimen/size_29dp"
+        android:layout_height="@dimen/size_29dp"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/error"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/size_315dp"
+        android:layout_height="398dp"
+        android:background="@drawable/border_radius_18"
+        android:backgroundTint="@color/white"
+        android:layout_marginTop="@dimen/size_84dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="昵称："
+            android:layout_marginLeft="@dimen/size_10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/name_ed"
+            app:layout_constraintStart_toStartOf="@+id/name_ed"
+            app:layout_constraintTop_toTopOf="@+id/name_ed" />
+
+        <EditText
+            android:id="@+id/name_ed"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:paddingLeft="55dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机号："
+            android:layout_marginLeft="@dimen/size_10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/phone_ed"
+            app:layout_constraintStart_toStartOf="@+id/phone_ed"
+            app:layout_constraintTop_toTopOf="@+id/phone_ed" />
+
+        <EditText
+            android:id="@+id/phone_ed"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="62dp"
+            android:inputType="phone"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_ed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码："
+            android:layout_marginLeft="@dimen/size_10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/password_ed"
+            app:layout_constraintStart_toStartOf="@+id/password_ed"
+            app:layout_constraintTop_toTopOf="@+id/password_ed" />
+
+        <EditText
+            android:id="@+id/password_ed"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="55dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_ed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确认密码："
+            android:layout_marginLeft="@dimen/size_10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/sure_password_ed"
+            app:layout_constraintStart_toStartOf="@+id/sure_password_ed"
+            app:layout_constraintTop_toTopOf="@+id/sure_password_ed" />
+
+        <EditText
+            android:id="@+id/sure_password_ed"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:paddingLeft="75dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password_ed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="验证码："
+            android:layout_marginLeft="@dimen/size_10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/token_ed"
+            app:layout_constraintStart_toStartOf="@+id/token_ed"
+            app:layout_constraintTop_toTopOf="@+id/token_ed" />
+
+        <EditText
+            android:id="@+id/token_ed"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:paddingLeft="62dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sure_password_ed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取验证码"
+            android:textColor="#3C95F3"
+            android:layout_marginRight="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/token_ed"
+            app:layout_constraintEnd_toEndOf="@+id/token_ed"
+            app:layout_constraintTop_toTopOf="@+id/token_ed" />
+
+        <TextView
+            android:id="@+id/submit_btn"
+            android:layout_width="135dp"
+            android:layout_height="@dimen/size_39dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/boder_radius_16"
+            android:backgroundTint="#72ADED"
+            android:gravity="center"
+            android:text="注册"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/token_ed" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

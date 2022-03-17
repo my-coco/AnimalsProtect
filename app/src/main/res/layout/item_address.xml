@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/address_name"
-    android:background="@drawable/border_grayness"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/size_30dp"
-    android:textColor="@color/black"
-    android:gravity="center_vertical"
-    android:paddingLeft="@dimen/size_16dp">
+    android:layout_height="@dimen/size_54dp" >
 
-</TextView>
+    <TextView
+        android:id="@+id/address_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_54dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

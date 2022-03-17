@@ -105,16 +105,11 @@
                         app:constraint_referenced_ids="iv1,iv3,iv4,iv2" />
                 </androidx.constraintlayout.motion.widget.MotionLayout>
 
-                <com.sixing.animalsprotect.shape.GridView
-                    android:id="@+id/gridview"
+                <com.sixing.animalsprotect.widget.MyRecycleView
+                    android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="21dp"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginEnd="21dp"
-                    android:gravity="center_horizontal"
-                    android:numColumns="2"
-                    android:verticalSpacing="10dp"
+                    android:layout_marginTop="40dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/motion" />

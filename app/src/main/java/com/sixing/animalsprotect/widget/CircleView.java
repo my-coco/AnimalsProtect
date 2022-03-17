@@ -1,4 +1,4 @@
-package com.sixing.animalsprotect.shape;
+package com.sixing.animalsprotect.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;

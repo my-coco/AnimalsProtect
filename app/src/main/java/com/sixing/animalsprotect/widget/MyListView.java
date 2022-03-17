@@ -1,7 +1,8 @@
-package com.sixing.animalsprotect.shape;
+package com.sixing.animalsprotect.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ListView;
 
 public class MyListView extends ListView {
@@ -21,5 +22,9 @@ public class MyListView extends ListView {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        heightMeasureSpec= View.MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE>>2,MeasureSpec.AT_MOST);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
 }

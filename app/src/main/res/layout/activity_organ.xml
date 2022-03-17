@@ -40,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.sixing.animalsprotect.shape.CircleView
+        <com.sixing.animalsprotect.widget.CircleView
             android:id="@+id/org_pic"
             android:layout_width="@dimen/size_79dp"
             android:layout_height="@dimen/size_79dp"

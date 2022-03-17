@@ -28,9 +28,9 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
     private ListView broadcast_list;
     private List<Broadcast> broadcasts;
     private BroadcastAdapter broadcastAdapter;
-    private ImageView animal_card,close_ic,back_ic;
+    private ImageView animal_card,close_ic,back_ic,nothing_ic;
     private ConstraintLayout card;
-    private TextView org_entry,animal_name,animal_words,card_animal_name,card_animal_old,card_animal_kind,card_animal_sex,card_animal_introduce;
+    private TextView org_entry,animal_name,animal_words,card_animal_name,card_animal_old,card_animal_kind,card_animal_sex,card_animal_introduce,nothing_tx;
     private String TAG="AnimalActivity";
     private AnimalModel animalModel;
     private ViewModelProvider viewModelProvider;
@@ -68,6 +68,8 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
         card_animal_kind=findViewById(R.id.card_animal_kind);
         card_animal_sex=findViewById(R.id.card_animal_sex);
         card_animal_introduce=findViewById(R.id.card_animal_introduce);
+        nothing_ic=findViewById(R.id.nothing_ic);
+        nothing_tx=findViewById(R.id.nothing_tx);
 
         viewModelProvider=new ViewModelProvider(this);
         animalModel=viewModelProvider.get(AnimalModel.class);
@@ -79,6 +81,15 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void run() {
                 List<Notice> notices=animalModel.getNoticeList(animalId,1);
+                if(notices.size()>0){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            nothing_ic.setVisibility(View.GONE);
+                            nothing_tx.setVisibility(View.GONE);
+                        }
+                    });
+                }
                 for (Notice notice:notices){
                     Broadcast broadcast=new Broadcast(drawable,animalInformation.getName(),notice.getText(),notice.getDate(),null,null);
                     broadcasts.add(broadcast);

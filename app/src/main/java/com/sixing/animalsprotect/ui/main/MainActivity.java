@@ -1,23 +1,32 @@
 package com.sixing.animalsprotect.ui.main;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationListener;
 import com.sixing.animalsprotect.R;
 import com.sixing.animalsprotect.constant.Constants;
-import com.sixing.animalsprotect.shara.SharadUtil;
+import com.sixing.animalsprotect.util.SharadUtil;
 import com.sixing.animalsprotect.ui.login.LoginActivity;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView home_ic,adoption_ic,rank_ic,my_ic;
@@ -26,13 +35,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Fragment[] fragments=new Fragment[4];
     private FragmentManager fragmentManager;
     private int fragmentIndex;
+    public static Activity mainActivity;
     private String TAG="MainActivity";
+    private Handler handler;
+    private AMapLocationClient mLocationClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharadUtil.getInstance(this);
         login();
+        try {
+            request();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         init();
         initView();
         initListener();
@@ -40,18 +57,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         showFragment(null,homeFragment);
         changeIc(-1,0);
         fragmentIndex=0;
+
     }
 
     private void init(){
+        mainActivity=this;
         fragmentManager=getSupportFragmentManager();
         adoptionFragment=new AdoptionFragment();
         homeFragment=new HomeFragment();
         myFragment=new MyFragment();
-        rankFragment=new RankFragment();
+        rankFragment=new NewRankFragment();
         fragments[0]=homeFragment;
         fragments[1]=adoptionFragment;
         fragments[2]=rankFragment;
         fragments[3]=myFragment;
+
+        handler=new Handler(callback);
     }
 
     private void initView(){
@@ -179,12 +200,75 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    private void location() throws Exception {
+        //声明AMapLocationClient类对象
+        AMapLocationClient.updatePrivacyShow(this, true, true);
+        AMapLocationClient.updatePrivacyAgree(this, true);
+        //声明定位回调监听器
+        AMapLocationListener mLocationListener = new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation amapLocation) {
+                if (amapLocation != null) {
+                    SharadUtil.put(Constants.LOCATIONPROVINCE,amapLocation.getProvince());
+                    SharadUtil.put(Constants.LOCATIONCITY,amapLocation.getCity());
+                    SharadUtil.put(Constants.LOCATIONCOUNTRY,amapLocation.getDistrict());
+                    handler.sendEmptyMessage(0);
+                    ((NewRankFragment)rankFragment).handler.sendEmptyMessage(0);
+                }
+            }
+        };
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
+        //设置定位回调监听
+        mLocationClient.setLocationListener(mLocationListener);
+        //启动定位
+        mLocationClient.startLocation();
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch(requestCode) {
+            case 1:
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    try {
+                        location();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+        }
+    }
+
+    private void request() throws Exception {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }else{
+                location();
+            }
+        }
+    }
+
     private void login(){
-        Log.d(TAG, "login: "+SharadUtil.getInstance(this).getString(Constants.USERPHONE,null));
-        if(SharadUtil.getInstance(this).getString(Constants.USERPHONE,null)==null){
+        if(SharadUtil.getString(Constants.USERPHONE,null)==null){
             Intent intent=new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
         }
     }
+
+    private Handler.Callback callback=new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message msg) {
+            switch (msg.what){
+                case 0:
+                    mLocationClient.stopLocation();
+                    break;
+            }
+            return false;
+        }
+    };
 }

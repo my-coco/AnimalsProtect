@@ -19,4 +19,5 @@
     <color name="animal_votes">#FF5733</color>
     <color name="rank_bg">#0CC5CF</color>
     <color name="broadcast_name">#426AB3</color>
+    <color name="theme_background_color">#FFD33D</color>
 </resources>
