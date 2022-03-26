@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="animal_pictures">
+        <item>@drawable/xiaomao1</item>
+        <item>@drawable/xiaomao2</item>
+        <item>@drawable/xiaomao3</item>
+        <item>@drawable/xiaomao4</item>
+        <item>@drawable/xiaomao5</item>
+        <item>@drawable/xiaomao6</item>
+        <item>@drawable/xiaomao7</item>
+        <item>@drawable/xiaogou1</item>
+        <item>@drawable/xiaogou2</item>
+        <item>@drawable/xiaogou3</item>
+        <item>@drawable/xiaogou4</item>
+    </array>
+    <array name="og_pictures">
+        <item>@drawable/jigou1</item>
+        <item>@drawable/jigou2</item>
+        <item>@drawable/jigou3</item>
+        <item>@drawable/jigou4</item>
+    </array>
+</resources>

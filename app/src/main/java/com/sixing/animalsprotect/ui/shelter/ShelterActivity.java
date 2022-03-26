@@ -1,17 +1,26 @@
 package com.sixing.animalsprotect.ui.shelter;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sixing.animalsprotect.R;
 import com.sixing.animalsprotect.adapter.AccountsAdapter;
@@ -20,6 +29,7 @@ import com.sixing.animalsprotect.adapter.BroadcastAdapter;
 import com.sixing.animalsprotect.bean.Account;
 import com.sixing.animalsprotect.bean.AnimalInformation;
 import com.sixing.animalsprotect.bean.Broadcast;
+import com.sixing.animalsprotect.bean.BroadcastCommit;
 import com.sixing.animalsprotect.bean.Notice;
 import com.sixing.animalsprotect.bean.ShelterInformation;
 import com.sixing.animalsprotect.constant.Constants;
@@ -27,18 +37,20 @@ import com.sixing.animalsprotect.ui.accounts.AccountsActivity;
 import com.sixing.animalsprotect.ui.animal.AnimalActivity;
 import com.sixing.animalsprotect.ui.report.ReportActivity;
 import com.sixing.animalsprotect.ui.shelter.viewmodel.ShelterViewModel;
+import com.sixing.animalsprotect.util.SharadUtil;
+import com.sixing.animalsprotect.widget.MyRecycleView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShelterActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class ShelterActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView org_boardcast,org_animals,org_accounts,org_name,org_address;
     private AccountsAdapter accountsAdapter;
     private List<Account> accountsList;
     private List<Notice> notices;
     private List<Broadcast> broadcasts;
     private List<AnimalInformation> animalInformations;
-    private ListView listView;
+    private MyRecycleView listView;
     private BroadcastAdapter broadcastAdapter;
     private ImageView back_ic,org_report;
     private AnimalAdopterAdapter animalAdopterAdapter;
@@ -48,7 +60,9 @@ public class ShelterActivity extends AppCompatActivity implements View.OnClickLi
     private int list_id=0;
     private String shelterId;
     private ShelterInformation shelterInformation=null;
-
+    private Handler handler;
+    private Context context;
+    private View editView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +73,8 @@ public class ShelterActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void init(){
+        handler=new Handler(callback);
+        context=this;
         notices=new ArrayList<>();
         animalInformations=new ArrayList<>();
         broadcasts=new ArrayList<>();
@@ -71,7 +87,7 @@ public class ShelterActivity extends AppCompatActivity implements View.OnClickLi
         back_ic=findViewById(R.id.back_ic);
         org_name=findViewById(R.id.org_name);
         org_address=findViewById(R.id.org_address);
-
+        listView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
         viewModelProvider=new ViewModelProvider(this);
         shelterViewModel=viewModelProvider.get(ShelterViewModel.class);
 
@@ -98,7 +114,6 @@ public class ShelterActivity extends AppCompatActivity implements View.OnClickLi
         org_accounts.setOnClickListener(this);
         back_ic.setOnClickListener(this);
         org_report.setOnClickListener(this);
-        listView.setOnItemClickListener(this);
     }
 
     private void initShelterInformation(String id){
@@ -141,6 +156,13 @@ public class ShelterActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void run() {
                 notices=shelterViewModel.getNoticeList(id,isAnimal);
+                listView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        listView.setAdapter(getBroadcastAdapter());
+                    }
+                });
+                list_id=0;
             }
         }).start();
     }
@@ -150,10 +172,10 @@ public class ShelterActivity extends AppCompatActivity implements View.OnClickLi
         broadcasts.clear();
         Drawable drawable=getDrawable(R.drawable.iu);
         for (Notice notice:notices){
-            Broadcast broadcast=new Broadcast(drawable,shelterInformation.getName(),notice.getText(),notice.getDate(),null,null);
+            Broadcast broadcast=new Broadcast(notice.getId(),drawable,shelterInformation.getName(),notice.getText(),notice.getDate(),notice.getLike(),notice.getWords());
             broadcasts.add(broadcast);
         }
-        broadcastAdapter=new BroadcastAdapter(broadcasts,this, this);
+        broadcastAdapter=new BroadcastAdapter(broadcasts,this, handler);
         return broadcastAdapter;
     }
 
@@ -206,36 +228,67 @@ public class ShelterActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()){
-            case R.id.list:
-                Intent intent=new Intent();
-                Bundle bundle=new Bundle();
-                switch (list_id){
-                    //animal
-                    case 1:
-                        intent.setClass(this, AnimalActivity.class);
-                        AnimalInformation animalInformation=animalInformations.get(position);
-                        bundle.putString(Constants.ANIMALID,animalInformation.getId());
-                        intent.putExtra(Constants.ANIMALIDBUNDLE,bundle);
-                        startActivity(intent);
-                        break;
-                    //account
-                    case 2:
-                        intent.setClass(this,AccountsActivity.class);
-                        Account account=accountsList.get(position);
-                        bundle.putString("title",account.getTitle());
-                        bundle.putString("reason",account.getReason());
-                        bundle.putString("date",account.getDate());
-                        intent.putExtra(Constants.ACCOUNTBUNDLE,bundle);
-                        startActivity(intent);
-                        break;
-                    //notice
-                    case 3:break;
-                }
-                break;
+    private Handler.Callback callback=new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message msg) {
+            switch (msg.what){
+                case 0:
+                    Toast.makeText(context,"评论失败",Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    editView=View.inflate(context,R.layout.fragment_edit,null);
+                    EditText editText=editView.findViewById(R.id.edit);
+                    editView.findViewById(R.id.bg).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            editText.clearFocus();
+                            ((ViewGroup)editView.getParent()).removeView(editView);
+                        }
+                    });
+                    TextView send_btn=editView.findViewById(R.id.send_btn);
+                    Bundle bundle=msg.getData();
+                    send_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(editText.getText().toString().length()>0){
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if(shelterViewModel.commitNotice(bundle.getString("Id"), SharadUtil.getString(Constants.USERPHONE,""),editText.getText().toString())){
+                                            Message message=Message.obtain();
+                                            Bundle bundle1=new Bundle();
+                                            message.what=2;
+                                            bundle1.putString("text",editText.getText().toString());
+                                            bundle1.putInt("position",bundle.getInt("position"));
+                                            message.setData(bundle1);
+                                            handler.sendMessage(message);
+                                        }else{
+                                            handler.sendEmptyMessage(0);
+                                        }
+                                    }
+                                }).start();
+                            }else{
+                                handler.sendEmptyMessage(3);
+                            }
+                        }
+                    });
+                    addContentView(editView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                    break;
+                case 2:
+                    Toast.makeText(context,"评论成功",Toast.LENGTH_SHORT).show();
+                    ((ViewGroup)editView.getParent()).removeView(editView);
+                    BroadcastAdapter broadcastAdapter=(BroadcastAdapter)listView.getAdapter();
+                    Bundle bundle1=msg.getData();
+                    int p=bundle1.getInt("position");
+                    String text=bundle1.getString("text");
+                    broadcastAdapter.getBroadcasts().get(p).getBroadcastCommits().add(new BroadcastCommit(SharadUtil.getString(Constants.USERNAME,""),SharadUtil.getString(Constants.USERPHONE,""),bundle1.getString("text")));
+                    ((BroadcastAdapter)listView.getAdapter()).notifyItemChanged(p);
+                    break;
+                case 3:
+                    Toast.makeText(context,"评论不能为空",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+            return false;
         }
-    }
+    };
 }

@@ -68,4 +68,12 @@ public interface HttpApi {
     //查询用户的收养信息
     @GET("/animalprotection/getAdoptions")
     Call<HttpResponse<List<Adoption>>> getAdoptions(@Query("user_phone") String user_phone);
+
+    //用户点赞动态或取消点赞
+    @GET("/animalprotection/likeNotice")
+    Call<HttpResponse<Boolean>> likeNotice(@Query("noticeId") String noticeId,@Query("userId") String userId,@Query("like") Boolean like);
+
+    //用户评论动态
+    @GET("/animalprotection/commentNotice")
+    Call<HttpResponse<Boolean>> commentNotice(@Query("noticeId") String noticeId,@Query("userId") String userId,@Query("text") String text);
 }

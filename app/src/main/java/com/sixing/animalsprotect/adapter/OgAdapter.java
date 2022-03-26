@@ -4,10 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,28 +20,28 @@ import com.sixing.animalsprotect.ui.shelter.ShelterActivity;
 
 import java.util.List;
 
-public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.Hodler> {
+public class OgAdapter extends RecyclerView.Adapter<OgAdapter.Hodler> {
     private List<SearchResult> searchResults;
     private Context context;
 
-    public AnimalAdapter(List<SearchResult> searchResults,Context context){
+    public OgAdapter(List<SearchResult> searchResults, Context context){
         this.searchResults=searchResults;
         this.context=context;
     }
 
     @NonNull
     @Override
-    public AnimalAdapter.Hodler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OgAdapter.Hodler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view=View.inflate(context,R.layout.item_my,null);
         Hodler hodler=new Hodler(view);
         return hodler;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AnimalAdapter.Hodler holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull OgAdapter.Hodler holder, @SuppressLint("RecyclerView") int position) {
         holder.textView.setText(searchResults.get(position).getName());
         try{
-            holder.imageView.setImageDrawable(context.getResources().obtainTypedArray(R.array.animal_pictures).getDrawable(position%11));
+            holder.imageView.setImageDrawable(context.getResources().obtainTypedArray(R.array.og_pictures).getDrawable(position%4));
         }catch (Exception e){
             e.printStackTrace();
         }

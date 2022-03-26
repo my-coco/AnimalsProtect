@@ -146,10 +146,11 @@ public class NewRankFragment extends Fragment implements View.OnClickListener,Ad
                     handler.sendEmptyMessage(1);
                 }
                 for (AnimalInformation animalInformation: animalInformations){
-                    AnimalRank animalRank_temp=new AnimalRank(animalInformation.getId(),getResources().getDrawable(R.drawable.xiaomao1),animalInformation.getName(),String.valueOf(animalInformation.getHot()),String.valueOf(animalRankList.size()+1));
+                    AnimalRank animalRank_temp=new AnimalRank(animalInformation.getId(),getResources().obtainTypedArray(R.array.animal_pictures).getDrawable(sum%11),animalInformation.getName(),String.valueOf(animalInformation.getHot()),String.valueOf(animalRankList.size()+1));
                     animalRankList.add(animalRank_temp);
                     if(sum>=3){
                         animalRanks.add(animalRank_temp);
+                        sum++;
                     }else{
                         int sum_ui=sum;
                         getActivity().runOnUiThread(new Runnable() {

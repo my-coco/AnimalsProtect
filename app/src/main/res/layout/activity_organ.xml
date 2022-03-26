@@ -148,7 +148,7 @@
             android:text="收支记录" />
     </LinearLayout>
 
-    <ListView
+    <com.sixing.animalsprotect.widget.MyRecycleView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

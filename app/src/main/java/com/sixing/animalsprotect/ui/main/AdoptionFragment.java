@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.sixing.animalsprotect.R;
 import com.sixing.animalsprotect.adapter.AnimalAdopterAdapter;
@@ -21,12 +22,13 @@ import com.sixing.animalsprotect.bean.AnimalInformation;
 import com.sixing.animalsprotect.constant.Constants;
 import com.sixing.animalsprotect.ui.animal.AnimalActivity;
 import com.sixing.animalsprotect.ui.main.viewModel.AdoptionViewModel;
+import com.sixing.animalsprotect.widget.MyRecycleView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdoptionFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
-    private ListView listView;
+public class AdoptionFragment extends Fragment implements View.OnClickListener{
+    private MyRecycleView listView;
     private View view;
     private AnimalAdopterAdapter animalAdopterAdapter;
     private ViewModelProvider viewModelProvider;
@@ -41,7 +43,6 @@ public class AdoptionFragment extends Fragment implements View.OnClickListener, 
         view=inflater.inflate(R.layout.fragment_adoption,container,false);
         Log.d("TAG", "onCreateView: "+TAG);
         init();
-        initListener();
         initList();
         return view;
     }
@@ -52,6 +53,7 @@ public class AdoptionFragment extends Fragment implements View.OnClickListener, 
         adoptionViewModel=viewModelProvider.get(AdoptionViewModel.class);
         sharedPreferences=getActivity().getSharedPreferences(Constants.USERINFO,Context.MODE_PRIVATE);
         listView=view.findViewById(R.id.animals_list);
+        listView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
     }
 
     private void initList(){
@@ -81,26 +83,8 @@ public class AdoptionFragment extends Fragment implements View.OnClickListener, 
 
     }
 
-    private void initListener(){
-        listView.setOnItemClickListener(this);
-    }
-
     @Override
     public void onClick(View v) {
 
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent=null;
-        Bundle bundle=new Bundle();
-        switch (parent.getId()){
-            case R.id.animals_list:
-                intent=new Intent(context, AnimalActivity.class);
-                bundle.putString(Constants.ANIMALID,((AnimalInformation)parent.getAdapter().getItem(position)).getId());
-                intent.putExtra(Constants.ANIMALIDBUNDLE,bundle);
-                startActivity(intent);
-                break;
-        }
     }
 }

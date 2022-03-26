@@ -55,7 +55,11 @@ public class AnimalHomeAdapter extends BaseAdapter {
             hodler=(Hodler) convertView.getTag();
         }
         SearchResult searchResult=searchResults.get(position);
-        hodler.imageView.setImageDrawable(context.getDrawable(R.drawable.xiaomao1));
+        try{
+            hodler.imageView.setImageDrawable(context.getResources().obtainTypedArray(R.array.animal_pictures).getDrawable(position%11));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         hodler.name.setText(searchResult.getName());
         hodler.tag.setText("#新朋友");
 

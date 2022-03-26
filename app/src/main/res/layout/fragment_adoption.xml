@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
+    <com.sixing.animalsprotect.widget.MyRecycleView
         android:id="@+id/animals_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

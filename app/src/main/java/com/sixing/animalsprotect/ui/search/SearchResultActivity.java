@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.sixing.animalsprotect.R;
 import com.sixing.animalsprotect.adapter.AnimalAdapter;
-import com.sixing.animalsprotect.adapter.AnimalHomeAdapter;
+import com.sixing.animalsprotect.adapter.OgAdapter;
 import com.sixing.animalsprotect.bean.AnimalHome;
 import com.sixing.animalsprotect.bean.SearchResult;
 import com.sixing.animalsprotect.constant.Constants;
@@ -33,6 +33,7 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
     private ImageView back_ic;
     private MyRecycleView recyclerView;
     private AnimalAdapter animalAdapter;
+    private OgAdapter ogAdapter;
     private Intent intent;
     private String key_words;
     private ViewModelProvider viewModelProvider;
@@ -75,13 +76,24 @@ public class SearchResultActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void run() {
                 List<SearchResult> searchResults=resultViewModel.getAnimalorShelter(key);
-                animalAdapter=new AnimalAdapter(searchResults,context);
-                recyclerView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        recyclerView.setAdapter(animalAdapter);
-                    }
-                });
+                if(key.equals("shelter_all")){
+                    ogAdapter=new OgAdapter(searchResults,context);
+                    recyclerView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerView.setAdapter(ogAdapter);
+                        }
+                    });
+                }else{
+                    animalAdapter=new AnimalAdapter(searchResults,context);
+                    recyclerView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerView.setAdapter(animalAdapter);
+                        }
+                    });
+                }
+
             }
         }).start();
 

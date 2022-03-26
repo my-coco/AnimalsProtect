@@ -1,11 +1,15 @@
 package com.sixing.animalsprotect.bean;
 
+import java.util.List;
+
 public class Notice {
     private String id;
     private String text;
     private String date;
     private int isAnimal;
     private String owerId;
+    private List<BroadcastLike> like;
+    private List<BroadcastCommit> words;
 
     public String getId() {
         return id;
@@ -45,5 +49,21 @@ public class Notice {
 
     public void setOwerId(String owerId) {
         this.owerId = owerId;
+    }
+
+    public List<BroadcastLike> getLike() {
+        return like;
+    }
+
+    public void setLike(List<BroadcastLike> like) {
+        this.like = like;
+    }
+
+    public List<BroadcastCommit> getWords() {
+        return words;
+    }
+
+    public void setWords(List<BroadcastCommit> words) {
+        this.words = words;
     }
 }

@@ -85,4 +85,18 @@ public class ShelterViewModel extends ViewModel {
         }
         return notices;
     }
+    public Boolean commitNotice(String noticeId,String userId,String text){
+        try{
+            Call<HttpResponse<Boolean>> call=httpRepository.commentNotice(noticeId,userId,text);
+            Response<HttpResponse<Boolean>> response=call.execute();
+            if(response.isSuccessful()){
+                if(response.body().getData()){
+                    return true;
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

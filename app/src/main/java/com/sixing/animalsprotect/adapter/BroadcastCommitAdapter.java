@@ -48,8 +48,8 @@ public class BroadcastCommitAdapter extends BaseAdapter {
             hodler=(Hodler)convertView.getTag();
         }
         BroadcastCommit broadcastCommit=broadcastCommits.get(position);
-        hodler.name.setText(broadcastCommit.getName());
-        hodler.words.setText(broadcastCommit.getWords());
+        hodler.name.setText(broadcastCommit.getUserName()+": ");
+        hodler.words.setText(broadcastCommit.getWord());
         return convertView;
     }
 

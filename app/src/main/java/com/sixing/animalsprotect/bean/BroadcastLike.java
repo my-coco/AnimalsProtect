@@ -1,13 +1,11 @@
 package com.sixing.animalsprotect.bean;
 
-public class BroadcastCommit {
+public class BroadcastLike {
     private String userName;
-    private String word;
     private String userId;
-    public BroadcastCommit(String userName,String userId,String word){
+    public BroadcastLike(String userName, String userId){
         this.userName=userName;
         this.userId=userId;
-        this.word=word;
     }
 
     public String getUserId() {
@@ -16,14 +14,6 @@ public class BroadcastCommit {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getWord() {
-        return word;
-    }
-
-    public void setWord(String word) {
-        this.word = word;
     }
 
     public String getUserName() {
