@@ -21,7 +21,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpRepository implements HttpApi{
-    private String baseUrl="http://192.168.222.190:8080";
+    private String baseUrl="http://192.168.111.89:8080";
 
     @Override
     public Call<HttpResponseGhost<List<HttpResponseGhost.AddressInfor>>> getAddress(int uid,String appkey,String parentId) {
@@ -47,10 +47,10 @@ public class HttpRepository implements HttpApi{
     }
 
     @Override
-    public Call<HttpResponse<List<AnimalInformation>>> getAnimalInformation(String id) {
+    public Call<HttpResponse<List<AnimalInformation>>> getAnimalInformation(String id,String userId) {
         Call<HttpResponse<List<AnimalInformation>>> res=null;
         try{
-            res=getHttpApi(baseUrl).getAnimalInformation(id);
+            res=getHttpApi(baseUrl).getAnimalInformation(id,userId);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -172,6 +172,17 @@ public class HttpRepository implements HttpApi{
         Call<HttpResponse<Boolean>> call=null;
         try{
             call=getHttpApi(baseUrl).commentNotice(noticeId,userId,text);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return call;
+    }
+
+    @Override
+    public Call<HttpResponse<Boolean>> adoptAnimal(String userId, String animalId, Float much) {
+        Call<HttpResponse<Boolean>> call=null;
+        try{
+            call=getHttpApi(baseUrl).adoptAnimal(userId,animalId,much);
         }catch (Exception e){
             e.printStackTrace();
         }

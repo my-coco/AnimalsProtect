@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel;
 import com.sixing.animalsprotect.bean.AnimalInformation;
 import com.sixing.animalsprotect.bean.HttpResponse;
 import com.sixing.animalsprotect.bean.Notice;
+import com.sixing.animalsprotect.constant.Constants;
 import com.sixing.animalsprotect.http.HttpRepository;
+import com.sixing.animalsprotect.util.SharadUtil;
 
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class AnimalModel extends ViewModel {
 
     public AnimalInformation getAnimalInformation(String id){
         AnimalInformation animalInformation=null;
-        Call<HttpResponse<List<AnimalInformation>>> call=repository.getAnimalInformation(id);
+        Call<HttpResponse<List<AnimalInformation>>> call=repository.getAnimalInformation(id, SharadUtil.getString(Constants.USERPHONE,null));
         try {
             Response<HttpResponse<List<AnimalInformation>>> repo=call.execute();
             if(repo.isSuccessful()){
@@ -65,4 +67,20 @@ public class AnimalModel extends ViewModel {
         }
         return false;
     }
+
+    public Boolean adoptAnimal(String userId, String animalId, Float much){
+        try{
+            Call<HttpResponse<Boolean>> call=repository.adoptAnimal(userId,animalId,much);
+            Response<HttpResponse<Boolean>> response=call.execute();
+            if(response.isSuccessful()){
+                if(response.body().getData()){
+                    return true;
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

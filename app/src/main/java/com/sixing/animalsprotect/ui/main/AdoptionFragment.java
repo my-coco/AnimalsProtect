@@ -56,7 +56,7 @@ public class AdoptionFragment extends Fragment implements View.OnClickListener{
         listView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
     }
 
-    private void initList(){
+    public void initList(){
         new Thread(new Runnable() {
             @Override
             public void run() {

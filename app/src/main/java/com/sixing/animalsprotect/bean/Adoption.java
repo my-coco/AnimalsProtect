@@ -5,7 +5,6 @@ public class Adoption {
     private String user_phone;
     private String animal_name;
     private float surplusFood;
-    private int time;
 
 
 
@@ -15,14 +14,6 @@ public class Adoption {
 
     public void setSurplusFood(float surplusFood) {
         this.surplusFood = surplusFood;
-    }
-
-    public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
     }
 
     public String getAnimal_id() {

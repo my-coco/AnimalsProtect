@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -31,6 +32,8 @@ import com.sixing.animalsprotect.bean.BroadcastCommit;
 import com.sixing.animalsprotect.bean.Notice;
 import com.sixing.animalsprotect.constant.Constants;
 import com.sixing.animalsprotect.ui.animal.viewmodel.AnimalModel;
+import com.sixing.animalsprotect.ui.main.AdoptionFragment;
+import com.sixing.animalsprotect.ui.main.MainActivity;
 import com.sixing.animalsprotect.ui.shelter.ShelterActivity;
 import com.sixing.animalsprotect.util.SharadUtil;
 import com.sixing.animalsprotect.widget.MyRecycleView;
@@ -43,9 +46,9 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
     private MyRecycleView broadcast_list;
     private List<Broadcast> broadcasts;
     private BroadcastAdapter broadcastAdapter;
-    private ImageView animal_card,close_ic,back_ic,nothing_ic;
+    private ImageView animal_card,close_ic,back_ic,nothing_ic,animal_food_ic,adoption_ic,close_btn;
     private ConstraintLayout card;
-    private TextView org_entry,animal_name,animal_words,card_animal_name,card_animal_old,card_animal_kind,card_animal_sex,card_animal_introduce,nothing_tx;
+    private TextView org_entry,animal_name,animal_words,card_animal_name,card_animal_old,card_animal_kind,card_animal_sex,card_animal_introduce,nothing_tx,animal_food,adopt1,adopt2,adopt3,sure_btn;
     private String TAG="AnimalActivity";
     private AnimalModel animalModel;
     private ViewModelProvider viewModelProvider;
@@ -54,8 +57,10 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
     private View.OnClickListener onClickListener=this;
     private Handler handler;
     private Context context;
-    private View editView;
-
+    private View editView,adoptionView;
+    private AlertDialog adoptDialog;
+    private AlertDialog.Builder adoptBuilder;
+    private int adopt_index=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,9 +96,24 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
         card_animal_introduce=findViewById(R.id.card_animal_introduce);
         nothing_ic=findViewById(R.id.nothing_ic);
         nothing_tx=findViewById(R.id.nothing_tx);
+        adoption_ic=findViewById(R.id.adoption_ic);
+        animal_food_ic=findViewById(R.id.animal_food_ic);
+        animal_food=findViewById(R.id.animal_food);
 
         viewModelProvider=new ViewModelProvider(this);
         animalModel=viewModelProvider.get(AnimalModel.class);
+
+        adoptBuilder=new AlertDialog.Builder(context);
+        adoptionView=getLayoutInflater().inflate(R.layout.alertdialog_adoption,null,false);
+        adoptBuilder.setView(adoptionView);
+        adoptBuilder.setCancelable(false);
+        adoptDialog=adoptBuilder.create();
+        adopt1=adoptionView.findViewById(R.id.first);
+        adopt2=adoptionView.findViewById(R.id.second);
+        adopt3=adoptionView.findViewById(R.id.third);
+        sure_btn=adoptionView.findViewById(R.id.sure_btn);
+        close_btn=adoptionView.findViewById(R.id.back_btn);
+
     }
 
     private void initList(){
@@ -124,25 +144,6 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
                 });
             }
         }).start();
-
-
-        //用户点赞
-//        List<String> prase_names=new ArrayList<>();
-//        prase_names.add("用户甲");
-//        prase_names.add("用户乙");
-//        prase_names.add("用户丙");
-        //用户评论
-//        List<BroadcastCommit> broadcastCommits=new ArrayList<>();
-//        String people_name="用户甲：";
-//        String people_words="小猫猫真可爱";
-//        for(int i=0;i<2;i++){
-//            BroadcastCommit broadcastCommit=new BroadcastCommit(people_name,people_words);
-//            broadcastCommits.add(broadcastCommit);
-//        }
-//        for(int i=0;i<5;i++){
-//            Broadcast broadcast=new Broadcast(drawable,name,words,time,prase_names,broadcastCommits);
-//            broadcasts.add(broadcast);
-//        }
     }
 
     private void initListener(){
@@ -150,6 +151,12 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
         close_ic.setOnClickListener(this);
         org_entry.setOnClickListener(this);
         back_ic.setOnClickListener(this);
+        adoption_ic.setOnClickListener(this);
+        adopt1.setOnClickListener(this);
+        adopt2.setOnClickListener(this);
+        adopt3.setOnClickListener(this);
+        close_btn.setOnClickListener(this);
+        sure_btn.setOnClickListener(this);
     }
 
     private void initAnimalInformation(String id){
@@ -172,6 +179,11 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
                             card_animal_old.setText("1岁");
                         }else{
                             card_animal_old.setText(String.valueOf( animalInformation.getOld())+"月");
+                        }
+                        if(animalInformation.getSurplusFood()>0){
+                            animal_food_ic.setVisibility(View.VISIBLE);
+                            animal_food.setVisibility(View.VISIBLE);
+                            animal_food.setText(String.valueOf(animalInformation.getSurplusFood())+"天");
                         }
                         shelterId=animalInformation.getShelterID();
                         org_entry.setText(animalInformation.getShelterName());
@@ -199,6 +211,62 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
                 break;  
             case R.id.back_ic:
                 finish();
+                break;
+            case R.id.adoption_ic:
+                adopt_index=-1;
+                adopt1.setBackground(getDrawable(R.drawable.border_radius_18_stroke));
+                adopt2.setBackground(getDrawable(R.drawable.border_radius_18_stroke));
+                adopt3.setBackground(getDrawable(R.drawable.border_radius_18_stroke));
+                adoptDialog.show();
+                break;
+            case R.id.first:
+                adopt1.setBackground(getDrawable(R.drawable.border_radius_18_stroke_red));
+                adopt2.setBackground(getDrawable(R.drawable.border_radius_18_stroke));
+                adopt3.setBackground(getDrawable(R.drawable.border_radius_18_stroke));
+                adopt_index=1;
+                break;
+            case R.id.second:
+                adopt1.setBackground(getDrawable(R.drawable.border_radius_18_stroke));
+                adopt2.setBackground(getDrawable(R.drawable.border_radius_18_stroke_red));
+                adopt3.setBackground(getDrawable(R.drawable.border_radius_18_stroke));
+                adopt_index=2;
+                break;
+            case R.id.third:
+                adopt1.setBackground(getDrawable(R.drawable.border_radius_18_stroke));
+                adopt2.setBackground(getDrawable(R.drawable.border_radius_18_stroke));
+                adopt3.setBackground(getDrawable(R.drawable.border_radius_18_stroke_red));
+                adopt_index=3;
+                break;
+            case R.id.back_btn:
+                adoptDialog.dismiss();
+                break;
+            case R.id.sure_btn:
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Boolean result=false;
+                        switch (adopt_index){
+                            case 1:
+                                result=animalModel.adoptAnimal(SharadUtil.getString(Constants.USERPHONE,null),animalId,7f);
+                                break;
+                            case 2:
+                                result=animalModel.adoptAnimal(SharadUtil.getString(Constants.USERPHONE,null),animalId,15f);
+                                break;
+                            case 3:
+                                result=animalModel.adoptAnimal(SharadUtil.getString(Constants.USERPHONE,null),animalId,30f);
+                                break;
+                            case -1:
+                                handler.sendEmptyMessage(4);
+                                break;
+                        }
+                        if(result){
+                            handler.sendEmptyMessage(5);
+                            ((AdoptionFragment)MainActivity.mainActivity.adoptionFragment).initList();
+                            adoptDialog.dismiss();
+                        }
+                    }
+                }).start();
+
                 break;
         }
     }
@@ -261,6 +329,25 @@ public class AnimalActivity extends AppCompatActivity implements View.OnClickLis
                     break;
                 case 3:
                     Toast.makeText(context,"评论不能为空",Toast.LENGTH_SHORT).show();
+                    break;
+                case 4:
+                    Toast.makeText(context,"请选择一项",Toast.LENGTH_SHORT).show();
+                    break;
+                case 5:
+                    animal_food_ic.setVisibility(View.VISIBLE);
+                    animal_food.setVisibility(View.VISIBLE);
+                    String day=animal_food.getText().toString();
+                    switch (adopt_index){
+                        case 1:
+                            animal_food.setText(String.valueOf(7f+Float.valueOf(day.substring(0,day.length()-1))));
+                            break;
+                        case 2:
+                            animal_food.setText(String.valueOf(15f+Float.valueOf(day.substring(0,day.length()-1))));
+                            break;
+                        case 3:
+                            animal_food.setText(String.valueOf(30f+Float.valueOf(day.substring(0,day.length()-1))));
+                            break;
+                    }
                     break;
             }
             return false;

@@ -31,11 +31,11 @@ import com.sixing.animalsprotect.ui.login.LoginActivity;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView home_ic,adoption_ic,rank_ic,my_ic;
     private TextView home_tx,adoption_tx,rank_tx,my_tx;
-    private Fragment adoptionFragment,homeFragment,myFragment,rankFragment;
+    public Fragment adoptionFragment,homeFragment,myFragment,rankFragment;
     private Fragment[] fragments=new Fragment[4];
     private FragmentManager fragmentManager;
     private int fragmentIndex;
-    public static Activity mainActivity;
+    public static MainActivity mainActivity;
     private String TAG="MainActivity";
     private Handler handler;
     private AMapLocationClient mLocationClient;

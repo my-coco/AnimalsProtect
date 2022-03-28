@@ -31,7 +31,7 @@ public interface HttpApi {
 
     //根据小动物ID获取小动物所有信息
     @GET("/animalprotection/getAnimalInformationById")
-    Call<HttpResponse<List<AnimalInformation>>> getAnimalInformation(@Query("id") String id);
+    Call<HttpResponse<List<AnimalInformation>>> getAnimalInformation(@Query("id") String id,@Query("userId") String userId);
 
     //根据ID获取动态列表
     @GET("/animalprotection/getNoticeList")
@@ -76,4 +76,8 @@ public interface HttpApi {
     //用户评论动态
     @GET("/animalprotection/commentNotice")
     Call<HttpResponse<Boolean>> commentNotice(@Query("noticeId") String noticeId,@Query("userId") String userId,@Query("text") String text);
+
+    // 用户收养动物
+    @GET("/animalprotection/adopteAnimal")
+    Call<HttpResponse<Boolean>> adoptAnimal(@Query("userId") String userId,@Query("animalId") String animalId,@Query("much") Float much);
 }
