@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 
 import com.sixing.animalsprotect.R;
@@ -19,7 +18,7 @@ import com.sixing.animalsprotect.util.SharadUtil;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView back_btn;
-    private TextView logout_btn,name_tx,person_word_tx;
+    private TextView logout_btn,name_tx,person_phone_tx;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +35,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         back_btn=findViewById(R.id.back_btn);
         logout_btn=findViewById(R.id.logout_btn);
         name_tx=findViewById(R.id.name_tx);
-        person_word_tx=findViewById(R.id.person_word_tx);
+        person_phone_tx=findViewById(R.id.person_phone_tx);
         name_tx.setText(SharadUtil.getString(Constants.USERNAME,""));
+        person_phone_tx.setText(SharadUtil.getString(Constants.USERPHONE,""));
         logout_btn.setOnClickListener(this);
         back_btn.setOnClickListener(this);
     }

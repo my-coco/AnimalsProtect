@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable-hdpi/boder_radius_18.xml" value="0.3265" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable-xxxhdpi/circle_grayness_38dp.xml" value="0.322" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable-xxxhdpi/solid_grayness_3dp.xml" value="0.3455" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/adoption_selector.xml" value="0.3085" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/back.xml" value="0.3085" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/black_btn.xml" value="0.3455" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/blackcat.xml" value="0.27" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/boder_radius_10.xml" value="0.266" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/boder_radius_16.xml" value="0.266" />
@@ -18,15 +21,21 @@
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/border_radius_18_stroke_red.xml" value="0.3085" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/border_redius_24.xml" value="0.2765" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/border_white_radius_8dp.xml" value="0.3085" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/circle_black_38dp.xml" value="0.322" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/icon_setting.xml" value="0.356" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/loading_anim.xml" value="0.27" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/nothing_ic.xml" value="0.2675" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/podium.xml" value="0.2675" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/prase.xml" value="0.3085" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/setting_btn.xml" value="0.322" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/drawable/solid_black_3dp.xml" value="0.3455" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/activity_accounts.xml" value="0.30055579307396324" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/activity_adoption.xml" value="0.30055579307396324" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/activity_animal.xml" value="0.25" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/activity_main.xml" value="0.2751586582048957" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/activity_organ.xml" value="0.25" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/activity_photo.xml" value="0.2911500641299701" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/activity_report.xml" value="0.2751586582048957" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/activity_search.xml" value="0.25" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/activity_search_result.xml" value="0.2751586582048957" />
@@ -39,7 +48,7 @@
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/fragment_load_phone.xml" value="0.30833333333333335" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/fragment_login_password.xml" value="0.30055579307396324" />
-        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/fragment_my.xml" value="0.33" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/fragment_my.xml" value="0.35118434603501547" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/fragment_rank.xml" value="0.22" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/fragment_rank_new.xml" value="0.33" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/item_accounts.xml" value="0.2751586582048957" />
@@ -50,6 +59,7 @@
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/item_home_animal.xml" value="0.23550724637681159" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/item_hot.xml" value="0.2751586582048957" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/item_my.xml" value="0.25" />
+        <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/item_photo.xml" value="0.2911500641299701" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/item_rank_animal.xml" value="0.33" />
         <entry key="..\:/Android_project/AnimalsProtect/app/src/main/res/layout/pop_animalcard.xml" value="0.33" />
       </map>

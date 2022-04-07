@@ -10,6 +10,8 @@ import com.sixing.animalsprotect.bean.SearchResult;
 import com.sixing.animalsprotect.bean.ShelterInformation;
 import com.sixing.animalsprotect.bean.UserInformation;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 import okhttp3.RequestBody;
@@ -80,4 +82,12 @@ public interface HttpApi {
     // 用户收养动物
     @GET("/animalprotection/adopteAnimal")
     Call<HttpResponse<Boolean>> adoptAnimal(@Query("userId") String userId,@Query("animalId") String animalId,@Query("much") Float much);
+
+    //用户上传头像
+    @POST("/animalprotection/setUserPhoto")
+    Call<HttpResponse<Boolean>> setUserPhoto(@Body RequestBody photo);
+
+    //用户上传背景
+    @POST("/animalprotection/setUserBgPhoto")
+    Call<HttpResponse<Boolean>> setUserBgPhoto(@Body RequestBody photo);
 }

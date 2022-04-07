@@ -69,6 +69,7 @@ public class LoginPasswordFragment extends Fragment implements View.OnClickListe
                             SharadUtil.put(Constants.USERPHONE,userInformation.getUser_phone());
                             SharadUtil.put(Constants.USERNAME,userInformation.getUser_name());
                             SharadUtil.put(Constants.USERPASSWORD,userInformation.getUser_password());
+
                             handler.sendEmptyMessage(1);
                         }else{
                             handler.sendEmptyMessage(0);

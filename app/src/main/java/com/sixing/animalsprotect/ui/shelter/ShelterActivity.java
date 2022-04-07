@@ -172,8 +172,15 @@ public class ShelterActivity extends AppCompatActivity implements View.OnClickLi
         broadcasts.clear();
         Drawable drawable=getDrawable(R.drawable.iu);
         for (Notice notice:notices){
-            Broadcast broadcast=new Broadcast(notice.getId(),drawable,shelterInformation.getName(),notice.getText(),notice.getDate(),notice.getLike(),notice.getWords());
-            broadcasts.add(broadcast);
+            try{
+                while (shelterInformation==null){
+                    Thread.sleep(50);
+                }
+                Broadcast broadcast=new Broadcast(notice.getId(),drawable,shelterInformation.getName(),notice.getText(),notice.getDate(),notice.getLike(),notice.getWords());
+                broadcasts.add(broadcast);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
         broadcastAdapter=new BroadcastAdapter(broadcasts,this, handler);
         return broadcastAdapter;

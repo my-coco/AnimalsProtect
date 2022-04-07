@@ -75,9 +75,8 @@ public class BroadcastAdapter extends RecyclerView.Adapter<BroadcastAdapter.Hodl
                 }
             }
             holder.prase_names.setText(names.substring(0,names.length()-1));
-        }else{
-            holder.praise_bg.setVisibility(View.GONE);
         }
+
         if(broadcast.getLike()){
             holder.like.setImageDrawable(context.getDrawable(R.drawable.like_y));
         }else{

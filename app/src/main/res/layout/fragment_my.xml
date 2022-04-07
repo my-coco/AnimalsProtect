@@ -13,8 +13,8 @@
             android:id="@+id/user_bg"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_315dp"
-            android:src="@drawable/xiaomao1"
             android:scaleType="center"
+            android:src="@drawable/xiaomao1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,10 +25,12 @@
             android:layout_height="@dimen/size_38dp"
             android:layout_marginTop="@dimen/size_8dp"
             android:layout_marginEnd="@dimen/size_8dp"
-            android:padding="4dp"
+            android:padding="8dp"
+            android:background="@drawable/setting_btn"
             android:src="@drawable/icon_setting"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
         <com.sixing.animalsprotect.widget.CircleView
             android:id="@+id/circleView"
@@ -37,6 +39,7 @@
             android:layout_marginStart="@dimen/size_20dp"
             android:layout_marginBottom="@dimen/size_25dp"
             android:src="@drawable/iu"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/user_bg"
             app:layout_constraintStart_toStartOf="@+id/user_bg" />
 
@@ -63,16 +66,26 @@
             app:layout_constraintTop_toTopOf="@+id/circleView" />
 
         <TextView
-            android:id="@+id/user_words"
+            android:id="@+id/phone_tx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size_9dp"
             android:textColor="@color/user_words_grayness"
-            android:text="快把二哈带走!!"
+            android:text="联系电话:"
             android:textSize="@dimen/font_13sp"
             app:layout_constraintStart_toStartOf="@+id/user_sex"
             app:layout_constraintTop_toBottomOf="@+id/user_sex" />
 
+        <TextView
+            android:id="@+id/user_phone_tx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/user_words_grayness"
+            android:textSize="@dimen/font_13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/phone_tx"
+            app:layout_constraintStart_toEndOf="@+id/phone_tx"
+            app:layout_constraintTop_toTopOf="@+id/phone_tx" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
